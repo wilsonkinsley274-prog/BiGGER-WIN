@@ -28,7 +28,85 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:24px 18px;color:
 @media(max-width:420px){.grid{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.stats .stat:last-child{grid-column:1/-1}h1{letter-spacing:-2px}}
 </style>
 </head>
-<body>
+<body><!-- BiGGER WIN LOGIN SYSTEM -->
+<section id="bw-auth" style="background:#171717;color:white;padding:25px;margin:20px auto;max-width:400px;border:2px solid #d6a629;border-radius:15px;text-align:center">
+
+<h2 style="color:#d6a629">BiGGER WIN</h2>
+<p>Welcome! Create your account or login.</p>
+
+<input id="bw-email" type="email" placeholder="Email address">
+
+<input id="bw-password" type="password" placeholder="Password">
+
+<input id="bw-name" type="text" placeholder="Full name">
+
+<button onclick="bwSignup()">Create Account</button>
+
+<button onclick="bwLogin()">Login</button>
+
+<button onclick="bwLogout()">Logout</button>
+
+<p id="bw-message"></p>
+</section>
+
+<style>
+#bw-auth input {
+width:90%;
+padding:13px;
+margin:8px;
+}
+#bw-auth button {
+width:95%;
+padding:13px;
+margin:7px;
+background:#d6a629;
+border:0;
+border-radius:6px;
+font-weight:bold;
+}
+</style>
+
+<script type="module">
+import { createClient } from
+'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+const supabase = createClient(
+'YOUR_SUPABASE_PROJECT_URL',
+'YOUR_SUPABASE_ANON_KEY'
+);
+
+window.bwSignup = async () => {
+const email = document.getElementById('bw-email').value;
+const password = document.getElementById('bw-password').value;
+
+const {error} = await supabase.auth.signUp({
+email,
+password
+});
+
+document.getElementById('bw-message').textContent =
+error ? error.message : 'Account created! Check your email.';
+};
+
+window.bwLogin = async () => {
+const email = document.getElementById('bw-email').value;
+const password = document.getElementById('bw-password').value;
+
+const {error} = await supabase.auth.signInWithPassword({
+email,
+password
+});
+
+document.getElementById('bw-message').textContent =
+error ? error.message : 'Welcome to BiGGER WIN!';
+};
+
+window.bwLogout = async () => {
+const {error} = await supabase.auth.signOut();
+document.getElementById('bw-message').textContent =
+error ? error.message : 'Logged out successfully.';
+};
+  </script>https://kedrvewjsixadhrchvpu.supabase.cokedrvewjsixadhrchvpu
 <header><nav class="nav"><div class="brand">BiGGER <span>WIN</span></div><div class="navlinks"><a href="#home">Home</a><a href="#games">Games</a><a href="#community">Community</a><a href="#creators">Creators</a><a href="#account">Account</a></div></nav></header>
 <main class="wrap">
 <section class="hero" id="home"><div><span class="kicker">🌍 YOUR WORLD OF POSSIBILITIES</span><h1>Play. Create.<br><span class="goldtext">Connect.</span></h1><p class="lead">Welcome to BiGGER WIN — a home for games, creators, and community. Explore the demo, meet the vision, and be part of what comes next.</p><div class="actions"><a class="btn primary" href="#games">Explore Games ↓</a><a class="btn secondary" href="#community">Discover the Platform</a></div></div><div class="hero-card"><span class="tag">THE NEXT CHAPTER STARTS HERE</span><div class="coin">🏆</div><h2>Your next big moment.</h2><p>One platform. New experiences. A growing community.</p><span class="tag">DEMO PREVIEW • NO REAL-MONEY PLAY</span></div></section>

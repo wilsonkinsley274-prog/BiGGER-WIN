@@ -64,9 +64,7 @@
 import { createClient } from
 'https://esm.sh/@supabase/supabase-js@2';
 
-const supabase = createClient(
-  'YOUR_PROJECT_URL'https://kedrvewjsixadhrchvpu.supabase.co,
-  'YOUR_PUBLISHABLE_KEY'sb_publishable_kY88vqNjvyYXQ6XjTRU9Bg_VVoOyqMq
+const supabase = createClient(https://kedrvewjsixadhrchvpu.supabase.co,sb_publishable_kY88vqNjvyYXQ6XjTRU9Bg_VVoOyqMq
 );
 
 document.getElementById('signup-btn').onclick = async () => {
@@ -96,7 +94,7 @@ document.getElementById('login-btn').onclick = async () => {
   <h3>Create Account</h3>
   <input id="signup-email" type="email" placeholder="Email address">
   <input id="signup-password" type="password" placeholder="Create password">
-  <button id="signup-btn">Sign Up</button>
+  <button id="sign-btn">Sign Up</button>
 
   <hr>
 
@@ -112,11 +110,7 @@ document.getElementById('login-btn').onclick = async () => {
 import { createClient } from
 'https://esm.sh/@supabase/supabase-js@2';
 
-const supabase = createClient(
-  'YOUR_PROJECT_URL',
-  'YOUR_PUBLISHABLE_KEY'
-);
-
+const supabase = createClient
 document.getElementById('signup-btn').onclick = async () => {
   const { error } = await supabase.auth.signUp({
     email: document.getElementById('signup-email').value,

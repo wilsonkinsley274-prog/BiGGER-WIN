@@ -87,49 +87,5 @@ document.getElementById('login-btn').onclick = async () => {
 </script>
 
 </body>
-<!-- BiGGER WIN Authentication -->
-<section id="auth-section">
-  <h2>Welcome to BiGGER WIN</h2>
-
-  <h3>Create Account</h3>
-  <input id="signup-email" type="email" placeholder="Email address">
-  <input id="signup-password" type="password" placeholder="Create password">
-  <button id="sign-btn">Sign Up</button>
-
-  <hr>
-
-  <h3>Login</h3>
-  <input id="login-email" type="email" placeholder="Email address">
-  <input id="login-password" type="password" placeholder="Password">
-  <button id="login-btn">Login</button>
-
-  <p id="auth-message"></p>
-</section>
-
-<script type="module">
-import { createClient } from
-'https://esm.sh/@supabase/supabase-js@2';
-
-const supabase = createClient
-document.getElementById('signup-btn').onclick = async () => {
-  const { error } = await supabase.auth.signUp({
-    email: document.getElementById('signup-email').value,
-    password: document.getElementById('signup-password').value
-  });
-
-  document.getElementById('auth-message').textContent =
-    error ? error.message : 'Registration successful! Check your email.';
-};
-
-document.getElementById('login-btn').onclick = async () => {
-  const { error } = await supabase.auth.signInWithPassword({
-    email: document.getElementById('login-email').value,
-    password: document.getElementById('login-password').value
-  });
-
-  document.getElementById('auth-message').textContent =
-    error ? error.message : 'Login successful!';
-};
-</script>
   
 </html>

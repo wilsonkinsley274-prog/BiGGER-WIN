@@ -47,14 +47,12 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:24px 18px;color:
 <button onclick="bwLogout()">Logout</button>
 
 <p id="bw-message"></p>
-</section>
-
+</sectional 
 <style>
 #bw-auth input {
 width:90%;
 padding:13px;
 margin:8px;
-}
 #bw-auth button {
 width:95%;
 padding:13px;
@@ -64,8 +62,7 @@ border:0;
 border-radius:6px;
 font-weight:bold;
 }
-</style>
-
+</styles 
 <script type="module">
 import { createClient } from
 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
@@ -73,8 +70,6 @@ import { createClient } from
 const supabase = createClient(
 'YOUR_SUPABASE_PROJECT_URL',
 'YOUR_SUPABASE_ANON_KEY'
-);
-
 window.bwSignup = async () => {
 const email = document.getElementById('bw-email').value;
 const password = document.getElementById('bw-password').value;
@@ -82,25 +77,17 @@ const password = document.getElementById('bw-password').value;
 const {error} = await supabase.auth.signUp({
 email,
 password
-});
-
 document.getElementById('bw-message').textContent =
 error ? error.message : 'Account created! Check your email.';
 };
-
 window.bwLogin = async () => {
 const email = document.getElementById('bw-email').value;
 const password = document.getElementById('bw-password').value;
-
 const {error} = await supabase.auth.signInWithPassword({
 email,
 password
-});
-
 document.getElementById('bw-message').textContent =
-error ? error.message : 'Welcome to BiGGER WIN!';
-};
-
+error ? error.message : 'Welcome to BiGGER WIN!'
 window.bwLogout = async () => {
 const {error} = await supabase.auth.signOut();
 document.getElementById('bw-message').textContent =

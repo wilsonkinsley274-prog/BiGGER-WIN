@@ -144,7 +144,7 @@ document.getElementById('bw-signup-btn')
     return;
   }
 
-  button.disabled = true;
+  button.Enebled= true;
   button.textContent = 'Creating account...';
   message.textContent = 'Please wait...';
 
@@ -178,7 +178,7 @@ document.getElementById('bw-login-btn')
     return;
   }
 
-  button.disabled = true;
+  button.Enebled= true;
   button.textContent = 'Logging in...';
   message.textContent = 'Please wait...';
 
@@ -194,7 +194,7 @@ document.getElementById('bw-login-btn')
   } catch (error) {
     message.textContent = error.message;
   } finally {
-    button.disabled = false;
+    button.enabled = true;
     button.textContent = 'LOGIN';
   }
 });

@@ -1,91 +1,201 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BiGGER WIN</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 20px;
-      background: #111;
-      color: white;
-      font-family: Arial, sans-serif;
-    }
-    .container {
-      max-width: 420px;
-      margin: 30px auto;
-      padding: 25px;
-      background: white;
-      color: #111;
-      border-radius: 15px;
-      text-align: center;
-    }
-    h1 { color: #c99a18; }
-    input, button {
-      width: 100%;
-      box-sizing: border-box;
-      padding: 13px;
-      margin: 8px 0;
-      border-radius: 7px;
-    }
-    input { border: 1px solid #ccc; }
-    button {
-      background: #c99a18;
-      color: white;
-      border: 0;
-      font-weight: bold;
-    }
-  </style>
-</head>
-<body>
+<!-- BiGGER WIN AUTHENTICATION -->
+<style>
+#bw-auth {
+  max-width: 420px;
+  margin: 30px auto;
+  padding: 24px;
+  background: white;
+  color: #111;
+  border-radius: 15px;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
 
-<div class="container">
-  <h1>BiGGER WIN</h1>
+#bw-auth h2 {
+  color: #c99a18;
+}
+
+#bw-auth input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px;
+  border: 1px solid #ccc;
+  border-radius: 7px;
+}
+
+.bw-field {
+  display: flex;
+  gap: 6px;
+  margin: 10px 0;
+}
+
+.bw-field input {
+  flex: 1;
+  min-width: 0;
+}
+
+.bw-eye {
+  width: 65px;
+  background: #333;
+  color: white;
+  border: none;
+  border-radius: 7px;
+}
+
+.bw-action {
+  width: 100%;
+  padding: 14px;
+  margin: 8px 0;
+  background: #c99a18;
+  color: white;
+  border: none;
+  border-radius: 7px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.bw-action:disabled {
+  opacity: 0.6;
+}
+
+#bw-message {
+  overflow-wrap: anywhere;
+}
+</style>
+
+<section id="bw-auth">
+  <h2>BiGGER WIN</h2>
   <p>Play, Create and Win!</p>
 
   <h3>Create Account</h3>
-  <input type="email" id="signup-email" placeholder="Email">
-  <input type="password" id="signup-password" placeholder="Password">
-  <button id="signup-btn">SIGN UP</button>
+
+  <input id="bw-signup-email"
+    type="email" placeholder="Email address"
+    autocomplete="email">
+
+  <div class="bw-field">
+    <input id="bw-signup-password"
+      type="password" placeholder="Create password"
+      autocomplete="new-password">
+    <button class="bw-eye" type="button"
+      data-target="bw-signup-password">Show</button>
+  </div>
+
+  <button id="bw-signup-btn" class="bw-action"
+    type="button">SIGN UP</button>
 
   <hr>
 
-  <h3>Login</h3>
-  <input type="email" id="login-email" placeholder="Email">
-  <input type="password" id="login-password" placeholder="Password">
-  <button id="login-btn">LOGIN</button>
+  <h3>Welcome Back</h3>
 
-  <p id="message"></p>
-</div>
+  <input id="bw-login-email"
+    type="email" placeholder="Email address"
+    autocomplete="username">
+
+  <div class="bw-field">
+    <input id="bw-login-password"
+      type="password" placeholder="Your password"
+      autocomplete="current-password">
+    <button class="bw-eye" type="button"
+      data-target="bw-login-password">Show</button>
+  </div>
+
+  <button id="bw-login-btn" class="bw-action"
+    type="button">LOGIN</button>
+
+  <p id="bw-message" role="status"></p>
+</section>
 
 <script type="module">
 import { createClient } from
 'https://esm.sh/@supabase/supabase-js@2';
 
-const supabase = createClient(https://kedrvewjsixadhrchvpu.supabase.co,sb_publishable_kY88vqNjvyYXQ6XjTRU9Bg_VVoOyqMq
+const supabase = createClient(,https://kedrvewjsixadhrchvpu.supabase.co/rest/v1/'sb_publishable_kY88vqNjvyYXQ6XjTRU9Bg_VVoOyqMq
 );
 
-document.getElementById('signup-btn').onclick = async () => {
-  const { error } = await supabase.auth.signUp({
-    email: document.getElementById('signup-email').value,
-    password: document.getElementById('signup-password').value
-  });
-  document.getElementById('message').textContent =
-    error ? error.message : 'Account created! Check your email.';
-};
+const message = document.getElementById('bw-message');
 
-document.getElementById('login-btn').onclick = async () => {
-  const { error } = await supabase.auth.signInWithPassword({
-    email: document.getElementById('login-email').value,
-    password: document.getElementById('login-password').value
+document.querySelectorAll('.bw-eye').forEach(button => {
+  button.addEventListener('click', () => {
+    const field = document.getElementById(
+      button.dataset.target
+    );
+
+    const showing = field.type === 'password';
+    field.type = showing ? 'text' : 'password';
+    button.textContent = showing ? 'Hide' : 'Show';
   });
-  document.getElementById('message').textContent =
-    error ? error.message : 'Login successful!';
-};
+});
+
+document.getElementById('bw-signup-btn')
+.addEventListener('click', async () => {
+  const button = document.getElementById('bw-signup-btn');
+  const email = document.getElementById('bw-signup-email').value.trim();
+  const password = document.getElementById('bw-signup-password').value;
+
+  if (!email || !password) {
+    message.textContent = 'Enter your email and password.';
+    return;
+  }
+
+  if (password.length < 6) {
+    message.textContent = 'Password must be at least 6 characters.';
+    return;
+  }
+
+  button.disabled = true;
+  button.textContent = 'Creating account...';
+  message.textContent = 'Please wait...';
+
+  try {
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password
+    });
+
+    if (error) throw error;
+
+    message.textContent = data.session
+      ? 'Account created successfully!'
+      : 'Account created! Check your email to confirm registration.';
+  } catch (error) {
+    message.textContent = error.message;
+  } finally {
+    button.disabled = false;
+    button.textContent = 'SIGN UP';
+  }
+});
+
+document.getElementById('bw-login-btn')
+.addEventListener('click', async () => {
+  const button = document.getElementById('bw-login-btn');
+  const email = document.getElementById('bw-login-email').value.trim();
+  const password = document.getElementById('bw-login-password').value;
+
+  if (!email || !password) {
+    message.textContent = 'Enter your email and password.';
+    return;
+  }
+
+  button.disabled = true;
+  button.textContent = 'Logging in...';
+  message.textContent = 'Please wait...';
+
+  try {
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password
+    });
+
+    if (error) throw error;
+
+    message.textContent = 'Login successful! Welcome to BiGGER WIN.';
+  } catch (error) {
+    message.textContent = error.message;
+  } finally {
+    button.disabled = false;
+    button.textContent = 'LOGIN';
+  }
+});
 </script>
-
-</body>
-  
-</html>

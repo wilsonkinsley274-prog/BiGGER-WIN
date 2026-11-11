@@ -200,7 +200,39 @@ document.getElementById('bw-signup-btn')
 });
 
 document.getElementById('bw-login-btn')
-.addEventListener('click', async () => {
+.addEventListener('click', async loginBtn.addEventListener('click', async (e) => {
+    e.preventDefault();
+
+    const email = document.getElementById('bw-login-email').value.trim();
+    const password = document.getElementById('bw-login-password').value;
+
+    if (!email || !password) {
+        alert('Please enter your email and password.');
+        return;
+    }
+
+    loginBtn.disabled = true;
+    loginBtn.textContent = 'Logging in...';
+
+    try {
+        const { data, error } = await supabase.auth.signInWithPassword({
+            email: email,
+            password: password
+        });
+
+        if (error) throw error;
+
+        alert('Login successful! Welcome to BiGGER WIN.');
+
+        window.location.reload();
+
+    } catch (error) {
+        alert('Login failed: ' + error.message);
+    } finally {
+        loginBtn.disabled = false;
+        loginBtn.textContent = 'Login';
+    }
+});
   const button = document.getElementById('bw-login-btn');
   const email = document.getElementById('bw-login-email').value.trim();
   const password = document.getElementById('bw-login-password').value;

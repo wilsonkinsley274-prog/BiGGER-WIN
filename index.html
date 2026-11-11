@@ -231,9 +231,12 @@ document.getElementById('bw-login-btn')
     } finally {
         loginBtn.disabled = false;
         loginBtn.textContent = 'Login';
-    }
-});
-  const button = document.getElementById('bw-login-btn');
+    
+  const button = document.getElementById('bw-login-btn');console.log("BiGGER WIN Login button:", loginBtn);
+
+if (!loginBtn) {
+    alert("Login button was not found!");
+}
   const email = document.getElementById('bw-login-email').value.trim();
   const password = document.getElementById('bw-login-password').value;
 

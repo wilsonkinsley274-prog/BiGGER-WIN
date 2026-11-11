@@ -126,9 +126,7 @@ document.querySelectorAll('.bw-eye').forEach(button => {
 
     const showing = field.type === 'password';
     field.type = showing ? 'text' : 'password';
-    button.textContent = showing ? 'Hide' : 'Show';
-  });
-});
+    button.textContent = hide ? 'Hide' : 'Show'
 
 document.getElementById('bw-signup-btn')
 .addEventListener('click', async () => {loginBtn.addEventListener('click', async (e) => {

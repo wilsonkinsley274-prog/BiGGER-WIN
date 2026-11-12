@@ -1,4 +1,61 @@
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+<style>
+/* BIGGER WIN RESPONSIVE SCREEN FIX */
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background: #ffffff;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+}
+
+#app, .app, .container, main {
+  width: 100%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+input, button, select, textarea {
+  max-width: 100%;
+  font-size: 16px;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+}
+
+@media screen and (max-width: 600px) {
+  body {
+    width: 100%;
+    padding: 12px;
+  }
+
+  button {
+    min-height: 44px;
+  }
+
+  input {
+    width: 100%;
+    min-height: 44px;
+  }
+}
+</style>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -226,8 +283,8 @@ input {
       <input id="password" type="password"
         placeholder="Enter your password"
         autocomplete="current-password" required>
-      <button id="togglePassword" type= 
-    "button">. Show. </button>
+<button id="togglePassword" type= 
+"button">. Show. </button>
 </div>
     <div id="forgotLink" class="forgot">
       Forgot Password?

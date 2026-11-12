@@ -6,79 +6,54 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BiGGER WIN - Welcome</title>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-}
-}<style>
+<style>
+* {
   box-sizing: border-box;
+}
+
+html, body {
   margin: 0;
   padding: 0;
-}
-
-body {body {
-  font-family: Arial, sans-serif;
-  background: #ffffff;
+  width: 100%;
+  min-height: 100%;
+  background: #ffffff !important;
   color: #222222;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  }
   font-family: Arial, sans-serif;
-  background: #090909;
-  color: white;
+}
+
+body {
   min-height: 100vh;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   padding: 20px;
 }
 
-.container {.container {
+.container {
   width: 100%;
-  max-width: 420px;
+  max-width: 430px;
   background: #ffffff;
-  border: 2px solid #d5a52d;
+  padding: 30px 24px;
+  border: 1px solid #ead9a3;
   border-radius: 18px;
-  padding: 30px 22px;
-  box-shadow: 0 5px 25px rgba(0,0,0,0.08);
-  }
-  width: 100%;
-  max-width: 420px;
-  background: #151515;
-  border: 1px solid #c99b28;
-  border-radius: 18px;
-  padding: 30px 22px;
-  box-shadow: 0 0 25px rgba(201,155,40,.15);
+  box-shadow: 0 5px 25px rgba(0,0,0,0.07);
 }
 
 .logo {
   text-align: center;
-  color: #e5b83b;
-  font-size: 32px;
+  font-size: 30px;
   font-weight: bold;
+  color: #c69b24;
   margin-bottom: 8px;
 }
 
-.subtitle {.subtitle {
+.subtitle {
   text-align: center;
-  color: #555555;
-  margin-bottom: 25px;
-  }
-  text-align: center;
-  color: #ccc;
+  color: #666666;
   margin-bottom: 25px;
 }
 
-.tabs {.tabs button {
-  flex: 1;
-  padding: 12px;
-  border: 1px solid #d5a52d;
-  background: #ffffff;
-  color: #222222;
-  border-radius: 8px;
-  font-weight: bold;
-  }
+.tabs {
   display: flex;
   gap: 10px;
   margin-bottom: 22px;
@@ -86,220 +61,148 @@ body {body {
 
 .tabs button {
   flex: 1;
-  padding: 12px;
-  border: 1px solid #c99b28;
-  background: transparent;
-  color: white;
+  padding: 13px;
+  border: 1px solid #d4ad43;
   border-radius: 8px;
+  background: #ffffff;
+  color: #9b7415;
   font-weight: bold;
 }
 
-.tabs button.active {.tabs button.active {
-  background: #d5a52d;
-  color: #111111;
-  }
-  background: #d5a52d;
-  color: #111;
+.tabs button.active {
+  background: #c69b24;
+  color: #ffffff;
 }
 
-label {label {
+label {
   display: block;
   margin: 15px 0 7px;
-  color: #222222;
-  font-size: 14px;
   font-weight: bold;
-  }
-  display: block;
-  margin: 15px 0 7px;
-  color: #e5b83b;
-  font-size: 14px;
+  color: #333333;
 }
 
-input {input {
+input {
   width: 100%;
   padding: 14px;
-  border-radius: 8px;
   border: 1px solid #cccccc;
+  border-radius: 8px;
+  font-size: 16px;
   background: #ffffff;
   color: #222222;
-  font-size: 16px;
-}
-  width: 100%;
-  padding: 14px;
-  border-radius: 8px;
-  border: 1px solid #555;
-  background: #090909;
-  color: white;
-  font-size: 16px;
+  outline-color: #c69b24;
 }
 
 .password-wrap {
-  position: relative;
+  display: flex;
+  gap: 7px;
 }
 
 .password-wrap input {
-  padding-right: 75px;
+  flex: 1;
+  min-width: 0;
 }
 
-.show-btn {.show-btn {
-  position: absolute;
-  right: 8px;
-  top: 8px;
-  border: none;
-  background: transparent;
-  color: #b8860b;
-  padding: 6px;
-  cursor: pointer;
-  font-weight: bold;
-  }
-  position: absolute;
-  right: 8px;
-  top: 8px;
-  border: none;
-  background: transparent;
-  color: #e5b83b;
-  padding: 6px;
-  cursor: pointer;
+.password-wrap button {
+  padding: 0 12px;
+  border: 1px solid #c69b24;
+  background: #ffffff;
+  color: #9b7415;
+  border-radius: 8px;
 }
 
-.main-btn {.main-btn {
+.main-button {
   width: 100%;
   margin-top: 22px;
   padding: 15px;
-  background: #d5a52d;
   border: none;
   border-radius: 8px;
-  color: #111111;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  }
-  width: 100%;
-  margin-top: 22px;
-  padding: 15px;
-  background: #d5a52d;
-  border: none;
-  border-radius: 8px;
-  color: #111;
+  background: #c69b24;
+  color: #ffffff;
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
 }
 
-.forgot {.forgot {
+.main-button:disabled {
+  opacity: 0.6;
+}
+
+.forgot {
   display: block;
   text-align: right;
-  margin-top: 15px;
-  color: #b8860b;
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: bold;
-       }
-  display: block;
-  text-align: right;
-  margin-top: 15px;
-  color: #e5b83b;
-  text-decoration: none;
+  margin-top: 14px;
+  color: #a17b19;
+  cursor: pointer;
+  text-decoration: underline;
   font-size: 14px;
 }
 
-.message {
+#message {
   margin-top: 18px;
-  padding: 10px;
-  border-radius: 7px;
   text-align: center;
-  font-size: 14px;
+  line-height: 1.5;
   overflow-wrap: anywhere;
+  font-size: 14px;
 }
 
 .hidden {
   display: none;
 }
 
-.footer {.footer {
+.footer {
   text-align: center;
-  color: #777777;
+  color: #888888;
   font-size: 12px;
   margin-top: 25px;
-    }
-  text-align: center;
-  color: #888;
-  font-size: 12px;
-  margin-top: 25px;
-}/* BiGGER WIN WHITE AND GOLD DESIGN */
-
-* {
-  box-sizing: border-box;
 }
-
-html, body {
-  background: #ffffff !important;
-  color: #222222 !important;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  min-height: 100%;
-}
-
-.container {
-  background: #ffffff !important;
-  color: #222222 !important;
-  width: 100%;
-  max-width: 500px;
-  margin: 0 auto;
-  padding: 25px 20px;
-}
-
-button {
-  cursor: pointer;
-}
-
-.logo {
-  color: #d4a017 !important;
-  font-weight: bold;
-  }
 </style>
 </head>
 
 <body>
+
 <div class="container">
 
   <div class="logo">BiGGER WIN</div>
-  <p class="subtitle">Welcome to your winning journey</p>
+  <div class="subtitle">Welcome to a world of opportunities</div>
 
   <div class="tabs">
-    <button id="loginTab" class="active" type="button">Login</button>
-    <button id="signupTab" type="button">Sign Up</button>
+    <button id="loginTab" class="active" type="button">LOGIN</button>
+    <button id="signupTab" type="button">SIGN UP</button>
   </div>
 
   <form id="authForm">
+
+    <div id="nameGroup" class="hidden">
+      <label for="fullName">Full Name</label>
+      <input id="fullName" type="text"
+        placeholder="Enter your full name"
+        autocomplete="name">
+    </div>
+
     <label for="email">Email Address</label>
     <input id="email" type="email"
       placeholder="Enter your email address"
       autocomplete="email" required>
 
-    <div id="passwordArea">
-      <label for="password">Password</label>
-      <div class="password-wrap">
-        <input id="password" type="password"
-          placeholder="Enter your password"
-          autocomplete="current-password" required>
-        <button class="show-btn" id="showPassword"
-          type="button">Show</button>
-      </div>
+    <label for="password">Password</label>
+    <div class="password-wrap">
+      <input id="password" type="password"
+        placeholder="Enter your password"
+        autocomplete="current-password" required>
+      <button id="togglePassword" type="button">Show</button>
     </div>
 
-    <a href="#" class="forgot" id="forgotPassword">
-      Forgot password?
-    </a>
+    <div id="forgotLink" class="forgot">
+      Forgot Password?
+    </div>
 
-    <button class="main-btn" id="submitBtn" type="submit">
-      Login
+    <button id="submitBtn" class="main-button" type="submit">
+      LOGIN
     </button>
+
   </form>
 
-  <div id="message" class="message hidden"
-    role="status" aria-live="polite"></div>
+  <div id="message" role="status" aria-live="polite"></div>
 
   <div class="footer">
     © 2026 BiGGER WIN. All rights reserved.
@@ -307,131 +210,182 @@ button {
 
 </div>
 
-<script>
-const SUPABASE_URL =https://kedrvewjsixadhrchvpu.supabase.co
-const SUPABASE_KEY =https://esm.sh/@supabase/supabase-js@2
-const clint
-  SUPABASE_URL,
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-const form = document.getElementById("authForm");
-const emailInput = document.getElementById("email");
-const passwordInput = document.getElementById("password");
-const passwordArea = document.getElementById("passwordArea");
-const submitBtn = document.getElementById("submitBtn");
-const message = document.getElementById("message");
+<script>
+/* ENTER YOUR SUPABASE DETAILS HERE */
+
+const SUPABASE_URL =https://kedrvewjsixadhrchvpu.supabase.co
+const SUPABASE_KEY =sb_publishable_kY88vqNjvyYXQ6XjTRU9Bg_VVoOyqMq
+
+/* CONNECT TO SUPABASE */
+
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+/* PAGE ELEMENTS */
+
 const loginTab = document.getElementById("loginTab");
 const signupTab = document.getElementById("signupTab");
-const forgotPassword = document.getElementById("forgotPassword");
-const showPassword = document.getElementById("showPassword");
+const nameGroup = document.getElementById("nameGroup");
+const fullName = document.getElementById("fullName");
+const email = document.getElementById("email");
+const password = document.getElementById("password");
+const togglePassword = document.getElementById("togglePassword");
+const forgotLink = document.getElementById("forgotLink");
+const submitBtn = document.getElementById("submitBtn");
+const message = document.getElementById("message");
+const authForm = document.getElementById("authForm");
 
-let mode = "login";
+let currentMode = "login";
 
-function showMessage(text) {
+function showMessage(text, success = false) {
   message.textContent = text;
-  message.classList.remove("hidden");
+  message.style.color = success ? "#198754" : "#c0392b";
 }
 
-function setMode(newMode) {
-  mode = newMode;
-  message.classList.add("hidden");
+function setMode(mode) {
+  currentMode = mode;
+  message.textContent = "";
 
-  loginTab.classList.toggle("active", mode === "login");
-  signupTab.classList.toggle("active", mode === "signup");
+  const signup = mode === "signup";
 
-  submitBtn.textContent =
-    mode === "login" ? "Login" : "Create Account";
+  loginTab.classList.toggle("active", !signup);
+  signupTab.classList.toggle("active", signup);
 
-  passwordInput.autocomplete =
-    mode === "login" ? "current-password" : "new-password";
+  nameGroup.classList.toggle("hidden", !signup);
+  forgotLink.classList.toggle("hidden", signup);
+
+  submitBtn.textContent = signup ? "CREATE ACCOUNT" : "LOGIN";
+  password.autocomplete = signup ? "new-password" : "current-password";
 }
 
 loginTab.addEventListener("click", () => setMode("login"));
 signupTab.addEventListener("click", () => setMode("signup"));
 
-showPassword.addEventListener("click", () => {
-  const hidden = passwordInput.type === "password";
-  passwordInput.type = hidden ? "text" : "password";
-  showPassword.textContent = hidden ? "Hide" : "Show";
+/* SHOW AND HIDE PASSWORD */
+
+togglePassword.addEventListener("click", () => {
+  const showing = password.type === "text";
+
+  password.type = showing ? "password" : "text";
+  togglePassword.textContent = showing ? "Show" : "Hide";
 });
 
-form.addEventListener("submit", async (event) => {
+/* LOGIN AND SIGNUP */
+
+authForm.addEventListener("submit", async (event) => {
   event.preventDefault();
+  message.textContent = "";
 
-  const email = emailInput.value.trim();
-  const password = passwordInput.value;
+  const userEmail = email.value.trim();
+  const userPassword = password.value;
 
-  if (!email || !password) {
+  if (!userEmail || !userPassword) {
     showMessage("Please enter your email and password.");
     return;
   }
 
-  submitBtn.disabled = true;
-  submitBtn.textContent = "Please wait...";
-
-  try {
-    if (mode === "signup") {
-      const { data, error } = await client.auth.signUp({
-        email,
-        password
-      });
-
-      if (error) throw error;
-
-      showMessage(
-        data.session
-          ? "Account created successfully!"
-          : "Account created. Check your email to confirm your account."
-      );
-
-    } else {
-      const { error } = await client.auth.signInWithPassword({
-        email,
-        password
-      });
-
-      if (error) throw error;
-
-      showMessage("Login successful! Welcome to BiGGER WIN.");
-    }
-
-  } catch (error) {
-    showMessage(error.message || "Something went wrong.");
-  } finally {
-    submitBtn.disabled = false;
-    submitBtn.textContent =
-      mode === "login" ? "Login" : "Create Account";
-  }
-});
-
-forgotPassword.addEventListener("click", async (event) => {
-  event.preventDefault();
-
-  const email = emailInput.value.trim();
-
-  if (!email) {
-    showMessage("Enter your email address first.");
-    emailInput.focus();
+  if (currentMode === "signup" && userPassword.length < 6) {
+    showMessage("Password must contain at least 6 characters.");
     return;
   }
 
-  showMessage("Sending password recovery email...");
+  submitBtn.disabled = true;
+  submitBtn.textContent = "PLEASE WAIT...";
 
   try {
-    const { error } = await client.auth.resetPasswordForEmail(
-      email,
-      {
-        redirectTo: window.location.origin
+    if (currentMode === "signup") {
+
+      const { data, error } = await supabaseClient.auth.signUp({
+        email: userEmail,
+        password: userPassword,
+        options: {
+          data: {
+            full_name: fullName.value.trim()
+          },
+          emailRedirectTo: window.location.origin
+        }
+      });
+
+      if (error) throw error;
+
+      if (data.session) {
+        showMessage("Your account has been created successfully!", true);
+      } else {
+        showMessage(
+          "Account created! Please check your email to confirm your account.",
+          true
+        );
       }
-    );
+
+    } else {
+
+      const { data, error } =
+        await supabaseClient.auth.signInWithPassword({
+          email: userEmail,
+          password: userPassword
+        });
+
+      if (error) throw error;
+
+      showMessage("Login successful! Welcome to BiGGER WIN.", true);
+
+    }
+
+  } catch (error) {
+    showMessage(error.message);
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent =
+      currentMode === "signup" ? "CREATE ACCOUNT" : "LOGIN";
+  }
+});
+
+/* FORGOTTEN PASSWORD */
+
+forgotLink.addEventListener("click", async () => {
+  const userEmail = email.value.trim();
+
+  if (!userEmail) {
+    showMessage("Enter your email address first.");
+    email.focus();
+    return;
+  }
+
+  showMessage("Sending password recovery email...", true);
+
+  try {
+    const { error } =
+      await supabaseClient.auth.resetPasswordForEmail(userEmail, {
+        redirectTo: window.location.origin
+      });
 
     if (error) throw error;
 
-    showMessage("Recovery email sent. Check your inbox.");
+    showMessage(
+      "Recovery email sent! Check your inbox and spam folder.",
+      true
+    );
 
   } catch (error) {
-    showMessage(error.message || "Could not send recovery email.");
+    showMessage(error.message);
   }
 });
+
+/* CHECK SUPABASE CONFIGURATION */
+
+if (
+  SUPABASE_URL === "YOUR_SUPABASE_URL" ||
+  SUPABASE_KEY === "YOUR_SUPABASE_PUBLISHABLE_KEY"
+) {
+  showMessage("Please enter your Supabase URL and publishable key.");
+}
+
 </script>
+
 </body>
-</html>
+  </html>
+      

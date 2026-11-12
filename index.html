@@ -410,13 +410,7 @@ togglePassword.addEventListener("click", () => {
   password.type = showing ? "password" : "text";
   togglePassword.textContent = showing ? "Show" : "Hide";
 });
-togglePassword.addEventListener("click", () => {
-    const showing = password.type === "text";
-
-    password.type = showing ? "password" : "text";
-
-    togglePassword.textContent = showing ? "Show" : "Hide";
-});
+  
 /* LOGIN AND SIGNUP */
 
 authForm.addEventListener("submit", async (event) => {

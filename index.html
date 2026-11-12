@@ -7,7 +7,44 @@
 <title>BiGGER WIN - Welcome</title>
 
 <style>
+/* BiGGER WIN mobile display */
 * {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+  background: #ffffff;
+  color: #222222;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+input, button {
+  max-width: 100%;
+  font-size: 16px;
+}
+
+button {
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 12px;
+  }
+
+  input, button {
+    width: 100%;
+    min-height: 48px;
+  }
+}
   box-sizing: border-box;
 }
 
@@ -215,8 +252,10 @@ input {
 <script>
 /* ENTER YOUR SUPABASE DETAILS HERE */
 
-const SUPABASE_URL =https://kedrvewjsixadhrchvpu.supabase.co
-const SUPABASE_KEY =sb_publishable_kY88vqNjvyYXQ6XjTRU9Bg_VVoOyqMq
+const SUPABASE_URL =
+  https://kedrvewjsixadhrchvpu.supabase.co
+const SUPABASE_KEY =
+  sb_publishable_kY88vqNjvyYXQ6XjTRU9Bg_VVoOyqMq
 
 /* CONNECT TO SUPABASE */
 

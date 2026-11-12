@@ -247,41 +247,6 @@ input {
   margin-top: 25px;
 }
 </style>
-  
-/* BiGGER WIN - Mobile Screen Fix */
-
-* {
-  box-sizing: border-box;
-}
-
-html,
-body {
-  width: 100%;
-  max-width: 100%;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-}
-
-input {
-  max-width: 100%;
-}
-
-@media (max-width: 600px) {
-  .password-field:has(input),
-  .password-container:has(input) {
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
-  }
-
-  input[type="password"],
-  input[id*="password"] {
-    min-width: 0;
-    max-width: 100%;
-  }
-}
-
 </head>
 
 <body>

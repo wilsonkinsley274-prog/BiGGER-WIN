@@ -246,6 +246,16 @@ input {
   font-size: 12px;
   margin-top: 25px;
 }
+  
+function togglePassword() {
+  const password = document.getElementById("bw-login-password");
+
+  if (password) {
+    password.type =
+      password.type === "password" ? "text" : "password";
+  }
+  }
+  
 </style>
 </head>
 

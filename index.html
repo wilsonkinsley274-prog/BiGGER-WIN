@@ -359,14 +359,7 @@ signupTab.addEventListener("click", () => setMode("signup"));
 
 /* SHOW AND HIDE PASSWORD */
 
-togglePassword.addEventListener("click", (
-const password = document.getElementById("bw-login-password");
-
-if (password) {
-  password.type =
-    password.type === "password" ? "text" : "password";
-}
-  ) => {
+togglePassword.addEventL) => {
   
   <input
   id="password"
@@ -553,6 +546,13 @@ input {
   <script>
 document.addEventListener("DOMContentLoaded", function () {
   document.querySelectorAll('input[type="password"]').forEach(function (password) {
+const password = document.getElementById("bw-login-password");
+
+if (password) {
+  password.type =
+    password.type === "password" ? "text" : "password";
+  }
+  
     const button = document.createElement("button");
     button.type = "button";
     button.textContent = "👁️";

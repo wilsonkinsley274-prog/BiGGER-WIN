@@ -371,6 +371,15 @@ signupTab.addEventListener("click", () => setMode("signup"));
 
 togglePassword.addEventL) => {
   
+function togglePassword() {
+  const password = document.getElementById("bw-login-password");
+
+  if (password) {
+    password.type =
+      password.type === "password" ? "text" : "password";
+  }
+  }
+  
   <input
   id="password"
   type="password"

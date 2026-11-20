@@ -359,7 +359,15 @@ signupTab.addEventListener("click", () => setMode("signup"));
 
 /* SHOW AND HIDE PASSWORD */
 
-togglePassword.addEventListener("click", () => {
+togglePassword.addEventListener("click", (
+const password = document.getElementById("bw-login-password");
+
+if (password) {
+  password.type =
+    password.type === "password" ? "text" : "password";
+}
+  ) => {
+  
   <input
   id="password"
   type="password"

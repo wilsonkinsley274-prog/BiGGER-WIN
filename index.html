@@ -542,7 +542,29 @@ input {
     padding: 26px 18px;
   }
   }
-  
+  <script>
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll('input[type="password"]').forEach(function (password) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.textContent = "👁️";
+    button.style.marginLeft = "8px";
+    button.style.cursor = "pointer";
+
+    password.insertAdjacentElement("afterend", button);
+
+    button.addEventListener("click", function () {
+      if (password.type === "password") {
+        password.type = "text";
+        button.textContent = "🙈";
+      } else {
+        password.type = "password";
+        button.textContent = "👁️";
+      }
+    });
+  });
+});
+</script>
 </script>
 
 </body>

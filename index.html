@@ -263,17 +263,45 @@ function togglePassword() {
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  // SUPABASE CONNECTION
+  const SUPABASE_URL =
+    https://kedrvewjsixadhrchvpu.supabase.co/rest/v1/
+
+  const SUPABASE_KEY =
+    "sb_publishable_kY88vqNjvyYXQ6XjTRU9Bg_VVoOyqMq";
+
+  const db = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+
+  // FORM ELEMENTS
+  const form = document.getElementById("authForm");
   const loginTab = document.getElementById("loginTab");
   const signupTab = document.getElementById("signupTab");
   const nameGroup = document.getElementById("nameGroup");
   const fullName = document.getElementById("fullName");
-  const submitBtn = document.getElementById("submitBtn");
+  const email = document.getElementById("email");
   const password = document.getElementById("password");
   const togglePassword = document.getElementById("togglePassword");
+  const submitBtn = document.getElementById("submitBtn");
   const forgotLink = document.getElementById("forgotLink");
+  const message = document.getElementById("message");
 
-  function setMode(mode) {
+  let mode = "login";
+
+  function showMessage(text, success) {
+    message.textContent = text;
+    message.style.color = success ? "green" : "red";
+  }
+
+  function setMode(newMode) {
+    mode = newMode;
     const isSignup = mode === "signup";
 
     nameGroup.classList.toggle("hidden", !isSignup);
@@ -289,6 +317,8 @@ document.addEventListener("DOMContentLoaded", function () {
     password.autocomplete = isSignup
       ? "new-password"
       : "current-password";
+
+    showMessage("", true);
   }
 
   loginTab.addEventListener("click", function () {
@@ -299,6 +329,7 @@ document.addEventListener("DOMContentLoaded", function () {
     setMode("signup");
   });
 
+  // SHOW / HIDE PASSWORD
   togglePassword.addEventListener("click", function () {
     const showing = password.type === "text";
 
@@ -306,7 +337,80 @@ document.addEventListener("DOMContentLoaded", function () {
     togglePassword.textContent = showing ? "Show" : "Hide";
   });
 
+  // LOGIN AND SIGN-UP
+  form.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    const userEmail = email.value.trim();
+    const userPassword = password.value;
+    const userName = fullName.value.trim();
+
+    if (!userEmail || !userPassword) {
+      showMessage("Please enter your email and password.", false);
+      return;
+    }
+
+    if (mode === "signup" && !userName) {
+      showMessage("Please enter your full name.", false);
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "PLEASE WAIT...";
+    showMessage("Connecting securely...", true);
+
+    try {
+      if (mode === "signup") {
+
+        const { data, error } = await db.auth.signUp({
+          email: userEmail,
+          password: userPassword,
+          options: {
+            data: {
+              full_name: userName
+            }
+          }
+        });
+
+        if (error) throw error;
+
+        if (data.session) {
+          showMessage("Registration successful! Welcome to BiGGER WIN.", true);
+          window.location.href = "dashboard.html";
+        } else {
+          showMessage(
+            "Registration received! Please check your email to confirm your account before logging in.",
+            true
+          );
+        }
+
+      } else {
+
+        const { data, error } =
+          await db.auth.signInWithPassword({
+            email: userEmail,
+            password: userPassword
+          });
+
+        if (error) throw error;
+
+        showMessage("Login successful! Opening dashboard...", true);
+
+        window.location.href = "dashboard.html";
+      }
+
+    } catch (error) {
+      showMessage(error.message, false);
+
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent =
+        mode === "signup" ? "SIGN UP" : "LOGIN";
+    }
+  });
+
   setMode("login");
+
 });
 </script>
   

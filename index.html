@@ -2,14 +2,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#080808">
-  <title>BiGGER WIN | Welcome</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#ffffff">
+<title>BiGGER WIN</title>
 
-  <style>
-    * {
-      
+<style>
 * {
   box-sizing: border-box;
   margin: 0;
@@ -24,10 +22,9 @@ body {
 }
 
 header {
-  padding: 22px 16px;
   text-align: center;
+  padding: 25px 15px;
   border-bottom: 1px solid #d6ad45;
-  background: #ffffff;
 }
 
 .logo {
@@ -38,98 +35,263 @@ header {
 }
 
 .subtitle {
-  color: #555555;
-  margin-top: 10px;
+  color: #666;
   font-size: 14px;
+  margin-top: 9px;
 }
 
 main {
-  width: 100%;
   max-width: 440px;
-  margin: 65px auto;
+  width: 100%;
+  margin: 45px auto;
   padding: 20px;
-  text-align: center;
+}
+
+.card {
+  border: 1px solid #d6ad45;
+  border-radius: 15px;
+  padding: 25px 20px;
+  background: white;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.06);
 }
 
 h1 {
+  text-align: center;
   color: #c69a2e;
-  font-size: 28px;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+  font-size: 27px;
 }
 
-p {
-  color: #555555;
-  line-height: 1.6;
+.tabs {
+  display: flex;
+  gap: 10px;
   margin-bottom: 25px;
 }
 
-.welcome-card {
+.tabs button {
+  flex: 1;
+  padding: 13px 5px;
   border: 1px solid #d6ad45;
-  border-radius: 15px;
-  padding: 30px 20px;
-  background: #ffffff;
+  background: white;
+  color: #a77c19;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-button {
+.tabs button.active {
+  background: #d6ad45;
+  color: #111;
+}
+
+label {
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  margin: 15px 0 7px;
+}
+
+input {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  background: white;
+  color: #111;
+}
+
+.password-box {
+  display: flex;
+  gap: 7px;
+}
+
+.password-box input {
+  flex: 1;
+  min-width: 0;
+}
+
+.show-btn {
+  padding: 0 10px;
+  border: 1px solid #d6ad45;
+  border-radius: 8px;
+  background: white;
+  color: #a77c19;
+  cursor: pointer;
+}
+
+.action {
   width: 100%;
   padding: 15px;
-  margin-top: 12px;
+  margin-top: 20px;
   border: none;
   border-radius: 8px;
   background: #d6ad45;
-  color: #111111;
+  color: #111;
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
 }
 
-button.secondary {
-  background: #ffffff;
-  color: #b58b25;
-  border: 1px solid #d6ad45;
+.forgot {
+  display: block;
+  text-align: right;
+  margin-top: 14px;
+  color: #a77c19;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+#message {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 14px;
+  color: #a77c19;
+  overflow-wrap: anywhere;
 }
 
 footer {
   text-align: center;
   padding: 25px;
-  color: #777777;
+  color: #777;
   font-size: 12px;
-    }
-      }
-  </style>
+}
+
+</style>
 </head>
 
 <body>
 
-  <header>
-    <div class="logo">BiGGER WIN</div>
-    <div class="subtitle">
-      Welcome to a world of opportunities
-    </div>
-  </header>
+<header>
+  <div class="logo">BiGGER WIN</div>
+  <div class="subtitle">
+    Welcome to a world of opportunities
+  </div>
+</header>
 
-  <main>
-    <div class="welcome-card">
-      <h1>Welcome!</h1>
+<main>
+  <div class="card">
 
-      <p>
-        Discover games, rewards, creators
-        and exciting opportunities with
-        BiGGER WIN.
-      </p>
+    <h1 id="formTitle">Welcome Back!</h1>
 
-      <button type="button">LOGIN</button>
+    <div class="tabs">
+      <button id="loginTab" class="active" type="button">
+        LOGIN
+      </button>
 
-      <button class="secondary" type="button">
-        CREATE ACCOUNT
+      <button id="signupTab" type="button">
+        SIGN UP
       </button>
     </div>
-  </main>
 
-  <footer>
-    © 2026 BiGGER WIN. All rights reserved.
-  </footer>
+    <form id="authForm">
+
+      <div id="nameGroup" class="hidden">
+        <label for="fullName">Full Name</label>
+        <input id="fullName" type="text"
+        placeholder="Enter your full name">
+      </div>
+
+      <label for="email">Email Address</label>
+      <input id="email" type="email"
+      placeholder="Enter your email" required>
+
+      <label for="password">Password</label>
+
+      <div class="password-box">
+        <input id="password" type="password"
+        placeholder="Enter your password" required>
+
+        <button class="show-btn" type="button"
+        id="showPassword">Show</button>
+      </div>
+
+      <div id="forgotGroup">
+        <span class="forgot" id="forgotPassword">
+          Forgot Password?
+        </span>
+      </div>
+
+      <button class="action" id="submitBtn" type="submit">
+        LOGIN
+      </button>
+
+      <p id="message" role="status"></p>
+
+    </form>
+  </div>
+</main>
+
+<footer>
+  © 2026 BiGGER WIN. All rights reserved.
+</footer>
+
+<script>
+const loginTab = document.getElementById("loginTab");
+const signupTab = document.getElementById("signupTab");
+const nameGroup = document.getElementById("nameGroup");
+const fullName = document.getElementById("fullName");
+const formTitle = document.getElementById("formTitle");
+const submitBtn = document.getElementById("submitBtn");
+const forgotGroup = document.getElementById("forgotGroup");
+const password = document.getElementById("password");
+const showPassword = document.getElementById("showPassword");
+const authForm = document.getElementById("authForm");
+const message = document.getElementById("message");
+
+let currentMode = "login";
+
+loginTab.addEventListener("click", function() {
+  currentMode = "login";
+  loginTab.classList.add("active");
+  signupTab.classList.remove("active");
+  nameGroup.classList.add("hidden");
+  fullName.required = false;
+  forgotGroup.classList.remove("hidden");
+  formTitle.textContent = "Welcome Back!";
+  submitBtn.textContent = "LOGIN";
+  message.textContent = "";
+});
+
+signupTab.addEventListener("click", function() {
+  currentMode = "signup";
+  signupTab.classList.add("active");
+  loginTab.classList.remove("active");
+  nameGroup.classList.remove("hidden");
+  fullName.required = true;
+  forgotGroup.classList.add("hidden");
+  formTitle.textContent = "Create Account";
+  submitBtn.textContent = "CREATE ACCOUNT";
+  message.textContent = "";
+});
+
+showPassword.addEventListener("click", function() {
+  if (password.type === "password") {
+    password.type = "text";
+    showPassword.textContent = "Hide";
+  } else {
+    password.type = "password";
+    showPassword.textContent = "Show";
+  }
+});
+
+authForm.addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  message.textContent =
+    "Your form is ready. Account connection is coming next.";
+});
+
+document.getElementById("forgotPassword")
+.addEventListener("click", function() {
+  message.textContent =
+    "Password recovery will be connected in the next step.";
+});
+</script>
 
 </body>
-  </html>
-
+</html>

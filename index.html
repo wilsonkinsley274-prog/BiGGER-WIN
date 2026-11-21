@@ -643,8 +643,83 @@ if (password) {
   });
 });
 </script>
+  
+/* BiGGER WIN mobile form corrections */
+.hidden {
+  display: none !important;
+}
+
+.password-wrap {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+  align-items: stretch;
+}
+
+.password-wrap input {
+  flex: 1;
+  min-width: 0;
+  width: 0;
+  box-sizing: border-box;
+}
+
+#togglePassword {
+  flex: 0 0 90px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+#authForm input {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+  
 </script>
 
 </body>
+  <div class="logo">BiGGER WIN</div>
+  <div class="subtitle">Welcome to a world of opportunities</div>
+
+  <div class="tabs">
+    <button id="loginTab" class="active" type="button">LOGIN</button>
+    <button id="signupTab" type="button">SIGN UP</button>
+  </div>
+
+  <form id="authForm">
+
+    <div id="nameGroup" class="hidden">
+      <label for="fullName">Full Name</label>
+      <input id="fullName" type="text"
+        placeholder="Enter your full name"
+        autocomplete="name">
+    </div>
+
+    <label for="email">Email Address</label>
+    <input id="email" type="email"
+      placeholder="Enter your email address"
+      autocomplete="email" required>
+
+    <label for="password">Password</label>
+    <div class="password-wrap">
+      <input id="password" type="password"
+        placeholder="Enter your password"
+        autocomplete="current-password" required>
+<button id="togglePassword" type="button">Show</button>
+</div>
+    <div id="forgotLink" class="forgot">
+      Forgot Password?
+    </div>
+
+    <button id="submitBtn" class="main-button" type="submit">
+      LOGIN
+    </button>
+
+  </form>
+
+  <div id="message" role="status" aria-live="polite"></div>
+
+  <div class="footer">
+    © 2026 BiGGER WIN. All rights reserved.
+  </div>
   </html>
       

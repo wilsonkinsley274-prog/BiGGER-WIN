@@ -56,6 +56,36 @@ img, video {
 }
 </style>
 
+/* BiGGER WIN mobile form corrections */
+.hidden {
+  display: none !important;
+}
+
+.password-wrap {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+  align-items: stretch;
+}
+
+.password-wrap input {
+  flex: 1;
+  min-width: 0;
+  width: 0;
+  box-sizing: border-box;
+}
+
+#togglePassword {
+  flex: 0 0 90px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+#authForm input {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -261,6 +291,55 @@ function togglePassword() {
 
 <body>
 
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const loginTab = document.getElementById("loginTab");
+  const signupTab = document.getElementById("signupTab");
+  const nameGroup = document.getElementById("nameGroup");
+  const fullName = document.getElementById("fullName");
+  const submitBtn = document.getElementById("submitBtn");
+  const password = document.getElementById("password");
+  const togglePassword = document.getElementById("togglePassword");
+  const forgotLink = document.getElementById("forgotLink");
+
+  function setMode(mode) {
+    const isSignup = mode === "signup";
+
+    nameGroup.classList.toggle("hidden", !isSignup);
+    fullName.required = isSignup;
+
+    loginTab.classList.toggle("active", !isSignup);
+    signupTab.classList.toggle("active", isSignup);
+
+    submitBtn.textContent = isSignup ? "SIGN UP" : "LOGIN";
+
+    forgotLink.style.display = isSignup ? "none" : "block";
+
+    password.autocomplete = isSignup
+      ? "new-password"
+      : "current-password";
+  }
+
+  loginTab.addEventListener("click", function () {
+    setMode("login");
+  });
+
+  signupTab.addEventListener("click", function () {
+    setMode("signup");
+  });
+
+  togglePassword.addEventListener("click", function () {
+    const showing = password.type === "text";
+
+    password.type = showing ? "password" : "text";
+    togglePassword.textContent = showing ? "Show" : "Hide";
+  });
+
+  setMode("login");
+});
+</script>
+  
 <div class="container">
 
   <div class="logo">BiGGER WIN</div>

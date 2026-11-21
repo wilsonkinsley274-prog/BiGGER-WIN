@@ -231,65 +231,103 @@ footer {
 </footer>
 
 <script>
-const loginTab = document.getElementById("loginTab");
-const signupTab = document.getElementById("signupTab");
-const nameGroup = document.getElementById("nameGroup");
-const fullName = document.getElementById("fullName");
-const formTitle = document.getElementById("formTitle");
-const submitBtn = document.getElementById("submitBtn");
-const forgotGroup = document.getElementById("forgotGroup");
-const password = document.getElementById("password");
-const showPassword = document.getElementById("showPassword");
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+const SUPABASE_URL = "
+  https://kedrvewjsixadhrchvpu.supabase.co"
+const SUPABASE_KEY = "
+  sb_publishable_kY88vqNjvyYXQ6XjTRU9Bg_VVoOyqMq";
+
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
 const authForm = document.getElementById("authForm");
+const email = document.getElementById("email");
+const password = document.getElementById("password");
+const fullName = document.getElementById("fullName");
 const message = document.getElementById("message");
+const submitBtn = document.getElementById("submitBtn");
 
 let currentMode = "login";
 
-loginTab.addEventListener("click", function() {
+document.getElementById("loginTab").addEventListener("click", () => {
   currentMode = "login";
-  loginTab.classList.add("active");
-  signupTab.classList.remove("active");
-  nameGroup.classList.add("hidden");
-  fullName.required = false;
-  forgotGroup.classList.remove("hidden");
-  formTitle.textContent = "Welcome Back!";
-  submitBtn.textContent = "LOGIN";
-  message.textContent = "";
 });
 
-signupTab.addEventListener("click", function() {
+document.getElementById("signupTab").addEventListener("click", () => {
   currentMode = "signup";
-  signupTab.classList.add("active");
-  loginTab.classList.remove("active");
-  nameGroup.classList.remove("hidden");
-  fullName.required = true;
-  forgotGroup.classList.add("hidden");
-  formTitle.textContent = "Create Account";
-  submitBtn.textContent = "CREATE ACCOUNT";
-  message.textContent = "";
 });
 
-showPassword.addEventListener("click", function() {
-  if (password.type === "password") {
-    password.type = "text";
-    showPassword.textContent = "Hide";
-  } else {
-    password.type = "password";
-    showPassword.textContent = "Show";
+authForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  const userEmail = email.value.trim();
+  const userPassword = password.value;
+
+  message.textContent = "Please wait...";
+  submitBtn.disabled = true;
+
+  try {
+    if (currentMode === "signup") {
+      const { data, error } = await supabaseClient.auth.signUp({
+        email: userEmail,
+        password: userPassword,
+        options: {
+          data: {
+            full_name: fullName.value.trim()
+          }
+        }
+      });
+
+      if (error) throw error;
+
+      message.textContent = data.session
+        ? "Account created successfully!"
+        : "Registration successful! Please check your email to verify your account.";
+
+    } else {
+      const { data, error } =
+        await supabaseClient.auth.signInWithPassword({
+          email: userEmail,
+          password: userPassword
+        });
+
+      if (error) throw error;
+
+      message.textContent =
+        "Welcome to BiGGER WIN! Login successful.";
+    }
+
+  } catch (error) {
+    message.textContent = error.message;
+  } finally {
+    submitBtn.disabled = false;
   }
 });
 
-authForm.addEventListener("submit", function(event) {
-  event.preventDefault();
-
-  message.textContent =
-    "Your form is ready. Account connection is coming next.";
-});
-
 document.getElementById("forgotPassword")
-.addEventListener("click", function() {
-  message.textContent =
-    "Password recovery will be connected in the next step.";
+.addEventListener("click", async () => {
+  const userEmail = email.value.trim();
+
+  if (!userEmail) {
+    message.textContent = "Please enter your email address first.";
+    return;
+  }
+
+  message.textContent = "Sending password recovery email...";
+
+  const { error } = await supabaseClient.auth
+    .resetPasswordForEmail(userEmail, {
+      redirectTo: window.location.origin + window.location.pathname
+    });
+
+  message.textContent = error
+    ? error.message
+    : "Password recovery email sent. Check your inbox.";
 });
 </script>
 

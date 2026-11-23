@@ -301,24 +301,5 @@ if (showPassword && password) {
       loginTab.classList.add("active");
       if (signupTab) signupTab.classList.remove("active");
       
-  const authForm = document.getElementById("authForm");
-  const submitBtn = document.getElementById("submitBtn");
-  const fullName = document.getElementById("fullName");
-  const forgotGroup = document.getElementById("forgotGroup");
-
-  if (signupTab) {
-    signupTab.addEventListener("click", function () {
-      submitBtn.textContent = "SIGN UP";
-      if (forgotGroup) forgotGroup.classList.add("hidden");
-    });
-  }
-
-  if (loginTab) {
-    loginTab.addEventListener("click", function () {
-      submitBtn.textContent = "LOGIN";
-      if (forgotGroup) forgotGroup.classList.remove("hidden");
-    });
-  }
-
   </script>
 </html>

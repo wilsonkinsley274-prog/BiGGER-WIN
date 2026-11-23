@@ -238,6 +238,78 @@ if (showPassword && password) {
     });
   }
 
+  const authForm = document.getElementById("authForm");
+  const submitBtn = document.getElementById("submitBtn");
+  const fullName = document.getElementById("fullName");
+  const forgotGroup = document.getElementById("forgotGroup");
+
+  if (signupTab) {
+    signupTab.addEventListener("click", function () {
+      submitBtn.textContent = "SIGN UP";
+      if (forgotGroup) forgotGroup.classList.add("hidden");
+    });
+  }
+
+  if (loginTab) {
+    loginTab.addEventListener("click", function () {
+      submitBtn.textContent = "LOGIN";
+      if (forgotGroup) forgotGroup.classList.remove("hidden");
+    });
+  }
+
+  if (authForm) {
+    authForm.addEventListener("submit", async function (event) {
+      event.preventDefault();
+
+      const isSignup = signupTab.classList.contains("active");
+      const emailAddress = email.value.trim();
+      const userPassword = password.value;
+
+      submitBtn.disabled = true;
+      message.textContent = "Please wait...";
+
+      try {
+        let result;
+
+        if (isSignup) {
+          if (!fullName.value.trim()) {
+            throw new Error("Please enter your full name.");
+          }
+
+          result = await supabaseClient.auth.signUp({
+            email: emailAddress,
+            password: userPassword,
+            options: {
+              data: {
+                full_name: fullName.value.trim()
+              }
+            }
+          });
+        } else {
+          result = await supabaseClient.auth.signInWithPassword({
+            email: emailAddress,
+            password: userPassword
+          });
+        }
+
+        if (result.error) throw result.error;
+
+        if (isSignup) {
+          message.textContent = result.data.session
+            ? "Account created successfully!"
+            : "Account created! Please check your email to confirm.";
+        } else {
+          message.textContent = "Login successful! Welcome to BiGGER WIN.";
+        }
+
+      } catch (error) {
+        message.textContent = error.message;
+      } finally {
+        submitBtn.disabled = false;
+      }
+    });
+  }
+  
 });
     </script>
 <header>

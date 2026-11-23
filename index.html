@@ -169,7 +169,20 @@ document.addEventListener("DOMContentLoaded", function () {
   const loginTab = document.getElementById("loginTab");
   const signupTab = document.getElementById("signupTab");
   const nameGroup = document.getElementById("nameGroup");
+const password = document.getElementById("password");
+const showPassword = document.getElementById("showPassword");
 
+if (showPassword && password) {
+  showPassword.addEventListener("click", function () {
+    if (password.type === "password") {
+      password.type = "text";
+      showPassword.textContent = "Hide";
+    } else {
+      password.type = "password";
+      showPassword.textContent = "Show";
+    }
+  });
+  }
   if (signupTab) {
     signupTab.addEventListener("click", function () {
       if (nameGroup) nameGroup.classList.remove("hidden");

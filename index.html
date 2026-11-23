@@ -164,66 +164,13 @@ footer {
 </head>
  </script> 
 <body>
-  
-<script
-src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-const SUPABASE_URL = "
-kedrvewjsixadhrchvpu";
-const SUPABASE_KEY = "
-sb_publishable_kY88vqNjvyYXQ6XjTRU9Bg_VVoOyqMq";
- 
-const supabaseClient = window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
-);
-  </script>
-<script>
+  <script>
 document.addEventListener("DOMContentLoaded", function () {
 
   const loginTab = document.getElementById("loginTab");
   const signupTab = document.getElementById("signupTab");
   const nameGroup = document.getElementById("nameGroup");
-  const password = document.getElementById("password");
-  const showPassword = document.getElementById("showPassword");
-  
-  const forgotPassword = document.getElementById("forgotPassword");
-  const email = document.getElementById("email");
-  const message = document.getElementById("message");
 
-if (forgotPassword) {
-  forgotPassword.addEventListener("click", async function () {
-    const emailAddress = email.value.trim();
-
-    if (!emailAddress) {
-      message.textContent = "Please enter your email address first.";
-      return;
-    }
-
-    const { error } = await supabaseClient.auth.resetPasswordForEmail(
-      emailAddress
-    );
-
-    if (error) {
-      message.textContent = error.message;
-    } else {
-      message.textContent = "Password recovery email sent. Check your inbox.";
-    }
-  });
-  }
-  
-if (showPassword && password) {
-  showPassword.addEventListener("click", function () {
-    if (password.type === "password") {
-      password.type = "text";
-      showPassword.textContent = "Hide";
-    } else {
-      password.type = "password";
-      showPassword.textContent = "Show";
-    }
-  });
-}
   if (signupTab) {
     signupTab.addEventListener("click", function () {
       if (nameGroup) nameGroup.classList.remove("hidden");
@@ -240,146 +187,8 @@ if (showPassword && password) {
     });
   }
 
-  const authForm = document.getElementById("authForm");
-  const submitBtn = document.getElementById("submitBtn");
-  const fullName = document.getElementById("fullName");
-  const forgotGroup = document.getElementById("forgotGroup");
-
-  if (signupTab) {
-    signupTab.addEventListener("click", function () {
-      submitBtn.textContent = "SIGN UP";
-      if (forgotGroup) forgotGroup.classList.add("hidden");
-    });
-  }
-
-  if (loginTab) {
-    loginTab.addEventListener("click", function () {
-      submitBtn.textContent = "LOGIN";
-      if (forgotGroup) forgotGroup.classList.remove("hidden");
-    });
-  }
-
-  if (authForm) {
-    authForm.addEventListener("submit", async function (event) {
-      event.preventDefault();
-
-      const isSignup = signupTab.classList.contains("active");
-      const emailAddress = email.value.trim();
-      const userPassword = password.value;
-
-      submitBtn.disabled = true;
-      message.textContent = "Please wait...";
-
-      try {
-        let result;
-
-        if (isSignup) {
-          if (!fullName.value.trim()) {
-            throw new Error("Please enter your full name.");
-          }
-
-          result = await supabaseClient.auth.signUp({
-            email: emailAddress,
-            password: userPassword,
-            options: {
-              data: {
-                full_name: fullName.value.trim()
-              }
-            }
-          });
-        } else {
-          result = await 
-          const supabaseClient = 
-          window.supabase.createClient(
-          SUPABASE_URL,
-          SUPABASE_KEY
-         );
-              
-        );
-            email: emailAddress,
-            password: userPassword
-          });
-        }
-        if (result.error) throw result.error;
-
-        if (isSignup) {
-          message.textContent = result.data.session
-            ? "Account created successfully!"
-            : "Account created! Please check your email to confirm.";
-        } else {
-          message.textContent = "Login successful! Welcome to BiGGER WIN.";
-        }
-
-      } catch (error) {
-        message.textContent = error.message;
-      } finally {
-        submitBtn.disabled = false;
-      }
-    });
-  }
-  
 });
-    </script>
-<header>
-  <div class="logo">BiGGER WIN</div>
-  <div class="subtitle">
-    Welcome to a world of opportunities
-  </div>
-</header>
-
-<main>
-  <div class="card">
-
-    <h1 id="formTitle">Welcome Back!</h1>
-
-    <div class="tabs">
-      <button id="loginTab" class="active" type="button">
-        LOGIN
-      </button>
-
-      <button id="signupTab" type="button">
-        SIGN UP
-      </button>
-    </div>
-
-    <form id="authForm">
-
-      <div id="nameGroup" class="hidden">
-        <label for="fullName">Full Name</label>
-        <input id="fullName" type="text"
-        placeholder="Enter your full name">
-      </div>
-
-      <label for="email">Email Address</label>
-      <input id="email" type="email"
-      placeholder="Enter your email" required>
-
-      <label for="password">Password</label>
-
-      <div class="password-box">
-        <input id="password" type="password"
-        placeholder="Enter your password" required>
-
-        <button class="show-btn" type="button"
-        id="showPassword">Show</button>
-      </div>
-
-      <div id="forgotGroup">
-        <span class="forgot" id="forgotPassword">
-          Forgot Password?
-        </span>
-      </div>
-
-      <button class="action" id="submitBtn" type="submit">
-        LOGIN
-      </button>
-
-      <p id="message" role="status"></p>
-
-    </form>
-  </div> </main>
-
-<footer>
+  </script>
   © 2026 BiGGER WIN. All rights reserved.
 </footer>
   

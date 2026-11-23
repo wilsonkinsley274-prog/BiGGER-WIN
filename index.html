@@ -173,9 +173,10 @@ kedrvewjsixadhrchvpu";
 const SUPABASE_KEY = "
 sb_publishable_kY88vqNjvyYXQ6XjTRU9Bg_VVoOyqMq";
  
-window.supabaseClient = window.supabase.createClient(
+const supabaseClient = window.supabase.createClient(
   SUPABASE_URL,
   SUPABASE_KEY
+);
 );
   </script>
 <script>
@@ -277,7 +278,7 @@ if (showPassword && password) {
             throw new Error("Please enter your full name.");
           }
 
-          result = await window.supabaseClient.auth.signUp({
+          result = await supabaseClient.auth.signUp({
             email: emailAddress,
             password: userPassword,
             options: {
@@ -287,12 +288,18 @@ if (showPassword && password) {
             }
           });
         } else {
-          result = await window.supabaseClient.auth.signInWithPassword({
+          result = await 
+          const supabaseClient = 
+          window.supabase.createClient(
+          SUPABASE_URL,
+          SUPABASE_KEY
+         );
+              
+        );
             email: emailAddress,
             password: userPassword
           });
         }
-        window.supabaseClient.auth.resetPasswordForEmail(
         if (result.error) throw result.error;
 
         if (isSignup) {

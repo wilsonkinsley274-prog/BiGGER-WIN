@@ -250,7 +250,32 @@ document.addEventListener("DOMContentLoaded", function () {
   const nameGroup = document.getElementById("nameGroup")
   const password = document.getElementById("password");
   const showPassword = document.getElementById("showPassword");
+  
+const forgotPassword = document.getElementById("forgotPassword");
+const email = document.getElementById("email");
+const message = document.getElementById("message");
 
+if (forgotPassword) {
+  forgotPassword.addEventListener("click", async function () {
+    const emailAddress = email.value.trim();
+
+    if (!emailAddress) {
+      message.textContent = "Please enter your email address first.";
+      return;
+    }
+
+    const { error } = await supabaseClient.auth.resetPasswordForEmail(
+      emailAddress
+    );
+
+    if (error) {
+      message.textContent = error.message;
+    } else {
+      message.textContent = "Password recovery email sent. Check your inbox.";
+    }
+  });
+    }
+    
 if (showPassword && password) {
   showPassword.addEventListener("click", function () {
     if (password.type === "password") {

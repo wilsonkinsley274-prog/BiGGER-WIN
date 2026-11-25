@@ -142,6 +142,93 @@ input:focus {
 #dashboard { text-align:center; }
 #dashboard h2 { color:#c69a28; margin-bottom:15px; }
 #dashboard p { margin-bottom:20px; overflow-wrap:anywhere; }
+  
+/* BiGGER WIN MOBILE RESPONSIVE DASHBOARD */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  width: 100%;
+  min-width: 320px;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  padding: 12px;
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: Arial, sans-serif;
+  background: #E9F5EC;
+}
+
+.container {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+#dashboard {
+  width: 100%;
+  max-width: 100%;
+  padding: 16px !important;
+  overflow: hidden;
+}
+
+#dashboard h2 {
+  font-size: 21px;
+  line-height: 1.35;
+}
+
+#dashboard p {
+  font-size: 14px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+#dashboard button {
+  min-height: 44px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+#dashboard > div:first-child {
+  flex-wrap: wrap;
+}
+
+#dashboard > div:nth-of-type(2) {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+#dashboard > div:nth-of-type(2) > div {
+  min-width: 0;
+  padding: 14px;
+  overflow-wrap: anywhere;
+}
+
+#dashboard h3 {
+  font-size: 16px;
+}
+
+@media (max-width: 360px) {
+  body {
+    padding: 8px;
+  }
+
+  #dashboard {
+    padding: 12px !important;
+  }
+
+  #dashboard h3 {
+    font-size: 14px;
+  }
+  }
+  
 </style>
 </head>
 

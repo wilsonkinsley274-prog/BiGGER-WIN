@@ -335,36 +335,39 @@ mode === "login" ? "LOGIN" : "CREATE ACCOUNT";
 }
 });
 
-/* 7. FORGOT PASSWORD */
+/* 7.  FORGOT PASSWORD */
 
 $("forgotPassword").addEventListener("click", async function() {
-const userEmail = $("email").value.trim();
+  const userEmail = $("email").value.trim();
 
-if (!userEmail) {
-notify("Enter your email address first.");
-return;
-}
+  if (!userEmail) {
+    notify("Enter your email address first.");
+    return;
+  }
 
-this.disabled = true;
-notify("Sending recovery email...");
+  this.disabled = true;
+  notify("Sending recovery email...");
 
-try {
-const { error } = await supabaseClient.auth.resetPasswordForEmail(
-userEmail,
-{ redirectTo: window.location.origin }
-);
+  try {
+    const { error } =
+      await supabaseClient.auth.resetPasswordForEmail(
+        userEmail,
+        {
+          redirectTo: window.location.origin + "/?reset=true"
+        }
+      );
 
-if (error) throw error;
+    if (error) throw error;
 
-notify("Recovery email sent. Check your inbox.");
+    notify("Recovery email sent. Check your inbox.");
 
-} catch (error) {
-notify(error.message);
-} finally {
-this.disabled = false;
-}
+  } catch (error) {
+    notify(error.message);
+  } finally {
+    this.disabled = false;
+  }
 });
-
+  
 /* 8. LOGOUT */
 
 $("logoutBtn").addEventListener("click", async function() {

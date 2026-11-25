@@ -365,11 +365,49 @@ body {
     </div>
 
   </div>
+  
+<!-- GAMES HUB AREA -->
+<div id="gamesHubArea" class="hidden"
+  style="background:#FFFFFF;padding:18px;border-radius:14px;margin-top:20px;">
 
+  <h2 style="color:#176B3A;">🎮 Games Hub</h2>
+  <p>Choose a game and enjoy the experience!</p>
+
+  <div style="background:#E9F5EC;padding:16px;border-radius:12px;margin-top:14px;">
+    <h3>🎡 Spin Wheel</h3>
+    <p>Try the Spin Wheel demo.</p>
+    <button type="button"
+      style="background:#176B3A;color:white;padding:12px;border:0;border-radius:9px;width:100%;">
+      SPIN WHEEL DEMO
+    </button>
+    <small>Demo only — no real prizes or payments coming soon.</small>
+  </div>
+
+  <div style="background:#E9F5EC;padding:16px;border-radius:12px;margin-top:14px;">
+    <h3>🎯 Quick Pick</h3>
+    <p>Coming soon.</p>
+  </div>
+
+  <div style="background:#E9F5EC;padding:16px;border-radius:12px;margin-top:14px;">
+    <h3>🔥 Score Streak</h3>
+    <p>Coming soon.</p>
+  </div>
+
+  <button type="button"
+    onclick="document.getElementById('gamesHubArea').classList.add('hidden')"
+    style="background:#D9AD42;color:#176B3A;padding:12px;border:0;border-radius:9px;width:100%;margin-top:18px;">
+    BACK TO DASHBOARD
+  </button>
+
+</div>
+  
   <div style="text-align:center;margin-top:25px;padding:15px;">
-    <strong style="color:#D9AD42;">BiGGER WIN</strong>
-    <p>Gaming • Creator Rewards • Community • AI</p>
-    <small>© 2026 BiGGER WIN</small>
+    <button
+  type="button"
+  id="openGamesHub"
+  style="background:#176B3A;color:white;padding:12px;border:0;border-radius:9px;width:100%;margin-top:10px;">
+  EXPLORE GAMES
+    </button>
   </div>
   
 </div>
@@ -584,7 +622,20 @@ if (updatePasswordBtn) {
       this.disabled = false;
     }
   });
-                                     }     
+                                     } 
+  
+/* OPEN GAMES HUB */
+
+const openGamesHub = $("openGamesHub");
+const gamesHubArea = $("gamesHubArea");
+
+if (openGamesHub && gamesHubArea) {
+  openGamesHub.addEventListener("click", function() {
+    gamesHubArea.classList.remove("hidden");
+    gamesHubArea.scrollIntoView({ behavior: "smooth" });
+  });
+      }
+    
 /* 8. LOGOUT */
 
 $("logoutBtn").addEventListener("click", async function() {

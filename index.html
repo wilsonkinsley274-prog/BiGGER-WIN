@@ -905,90 +905,110 @@ tapTimer=null;
 }
 
 
+
 if(type==="spin"){
 
 area.innerHTML=`
 <h3>🎡 Spin Wheel Demo</h3>
-<p>Press the button and watch the wheel roll!</p>
+<p>Listen as the wheel spins!</p>
 
 <div style="position:relative;width:260px;height:260px;max-width:80vw;margin:25px auto;">
-
-<div id="spinWheel" style="
-width:100%;
-height:100%;
-border-radius:50%;
-border:8px solid #D4AF37;
-box-sizing:border-box;
-background:conic-gradient(
-#087F45 0deg 45deg,
-#F5C542 45deg 90deg,
-#111111 90deg 135deg,
-#FFFFFF 135deg 180deg,
-#087F45 180deg 225deg,
-#F5C542 225deg 270deg,
-#111111 270deg 315deg,
-#FFFFFF 315deg 360deg
-);
-box-shadow:0 5px 20px #0003;
-transition:transform 4.2s cubic-bezier(.12,.75,.12,1);
-"></div>
-
-<div style="
-position:absolute;
-top:-10px;
-left:50%;
-transform:translateX(-50%);
-border-left:15px solid transparent;
-border-right:15px solid transparent;
-border-top:30px solid #D4AF37;
-z-index:2;
-"></div>
-
+  <div id="spinWheel" style="
+    width:100%;height:100%;border-radius:50%;
+    border:8px solid #D4AF37;box-sizing:border-box;
+    background:conic-gradient(
+      #087F45 0deg 45deg,
+      #F5C542 45deg 90deg,
+      #111 90deg 135deg,
+      #fff 135deg 180deg,
+      #087F45 180deg 225deg,
+      #F5C542 225deg 270deg,
+      #111 270deg 315deg,
+      #fff 315deg 360deg
+    );
+    transition:transform 4.2s cubic-bezier(.12,.75,.12,1);
+  "></div>
+  <div style="position:absolute;top:-10px;left:50%;
+  transform:translateX(-50%);border-left:15px solid transparent;
+  border-right:15px solid transparent;border-top:30px solid #D4AF37;">
+  </div>
 </div>
 
 <button class="game-action" id="spinButton">🎡 SPIN NOW</button>
-
-<p class="game-result" id="gameResult">
-Your result will appear here.
-</p>
-
-<p style="font-size:12px;color:#777;">
-Demo only — no cash or real prizes.
-</p>
+<p class="game-result" id="gameResult">Your result will appear here.</p>
+<p style="font-size:12px;color:#777;">Demo only — no cash or real prizes.</p>
 `;
 
 let rotation=0;
+let audioContext=null;
+let soundTimer=null;
+
+function playTick(){
+  if(!audioContext) return;
+  const oscillator=audioContext.createOscillator();
+  const gain=audioContext.createGain();
+  oscillator.type="sine";
+  oscillator.frequency.value=850;
+  gain.gain.setValueAtTime(0.08,audioContext.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.001,audioContext.currentTime+0.045);
+  oscillator.connect(gain);
+  gain.connect(audioContext.destination);
+  oscillator.start();
+  oscillator.stop(audioContext.currentTime+0.05);
+}
+
+function playWin(){
+  if(!audioContext) return;
+  [523,659,784,1047].forEach((frequency,index)=>{
+    const oscillator=audioContext.createOscillator();
+    const gain=audioContext.createGain();
+    const start=audioContext.currentTime+index*0.14;
+    oscillator.frequency.value=frequency;
+    gain.gain.setValueAtTime(0.12,start);
+    gain.gain.exponentialRampToValueAtTime(0.001,start+0.25);
+    oscillator.connect(gain);
+    gain.connect(audioContext.destination);
+    oscillator.start(start);
+    oscillator.stop(start+0.26);
+  });
+}
 
 $("spinButton").addEventListener("click",function(){
 
 const button=this;
 const wheel=$("spinWheel");
 
+if(button.disabled) return;
+
+const AudioAPI=window.AudioContext||window.webkitAudioContext;
+if(AudioAPI){
+  audioContext=audioContext||new AudioAPI();
+  if(audioContext.state==="suspended") audioContext.resume();
+}
+
 button.disabled=true;
 $("gameResult").textContent="Spinning... 🎡";
 
+soundTimer=setInterval(playTick,130);
+
 const results=[
-"Great try! 🌟",
-"Keep playing! 🎮",
-"Nice spin! 🎉",
-"Try again! 💚",
+"Great try! 🌟","Keep playing! 🎮",
+"Nice spin! 🎉","Try again! 💚",
 "You're on a roll! 🏆",
-"Gold Star! ⭐",
-"Extra Turn! 🎯",
-"Demo Winner! 🥳"
+"Gold Star! ⭐","Extra Turn! 🎯","Demo Winner! 🥳"
 ];
 
 const winner=Math.floor(Math.random()*results.length);
-
 rotation+=2160+Math.floor(Math.random()*360);
-
 wheel.style.transform="rotate("+rotation+"deg)";
 
 setTimeout(()=>{
 
-$("gameResult").textContent=
-"Demo result: "+results[winner];
+clearInterval(soundTimer);
+soundTimer=null;
+playWin();
 
+$("gameResult").textContent="Demo result: "+results[winner];
 button.disabled=false;
 
 },4300);
@@ -996,6 +1016,7 @@ button.disabled=false;
 });
 
 }
+  
 
 if(type==="guess"){
 

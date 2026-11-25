@@ -405,7 +405,53 @@ $("forgotPassword").addEventListener("click", async function() {
     this.disabled = false;
   }
 });
-  
+
+/* PASSWORD RESET HANDLER */
+
+const updatePasswordBtn = $("updatePasswordBtn");
+
+if (updatePasswordBtn) {
+  updatePasswordBtn.addEventListener("click", async function() {
+    const newPassword = $("newPassword").value;
+    const confirmPassword = $("confirmNewPassword").value;
+
+    if (newPassword.length < 6) {
+      notify("Password must be at least 6 characters.");
+      return;
+    }
+
+    if (newPassword !== confirmPassword) {
+      notify("Passwords do not match.");
+      return;
+    }
+
+    this.disabled = true;
+    notify("Updating your password...");
+
+    try {
+      const { error } = await supabaseClient.auth.updateUser({
+        password: newPassword
+      });
+
+      if (error) throw error;
+
+      notify("Password updated successfully. Please log in again.");
+
+      await supabaseClient.auth.signOut();
+
+      $("resetArea").classList.add("hidden");
+      authArea.classList.remove("hidden");
+      dashboard.classList.add("hidden");
+      authForm.reset();
+      setMode("login");
+
+    } catch (error) {
+      notify(error.message);
+    } finally {
+      this.disabled = false;
+    }
+  });
+                                     }     
 /* 8. LOGOUT */
 
 $("logoutBtn").addEventListener("click", async function() {
@@ -441,6 +487,39 @@ notify(error.message);
 }
 
 restoreSession();
+
+/* DETECT PASSWORD RECOVERY */
+
+async function startApp() {
+  const { data, error } = await supabaseClient.auth.getSession();
+
+  if (error) {
+    notify(error.message);
+    return;
+  }
+
+  const isRecovery =
+    window.location.search.includes("reset=true") ||
+    window.location.hash.includes("type=recovery");
+
+  if (isRecovery) {
+    authArea.classList.remove("hidden");
+    dashboard.classList.add("hidden");
+
+    document.querySelector(".tabs").classList.add("hidden");
+    authForm.classList.add("hidden");
+    $("resetArea").classList.remove("hidden");
+
+    return;
+  }
+
+  if (data.session) {
+    showDashboard(data.session.user);
+  }
+}
+
+startApp();
+  
 
 </script>
 </body>

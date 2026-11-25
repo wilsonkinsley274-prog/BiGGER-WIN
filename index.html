@@ -8,226 +8,366 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-* { box-sizing:border-box; margin:0; padding:0; }
+*{box-sizing:border-box;margin:0;padding:0}
 
-body {
-  font-family:Arial,sans-serif;
-  background:#fff;
-  color:#111;
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:20px;
+body{
+font-family:Arial,sans-serif;
+background:#fff;
+color:#111;
+min-height:100vh;
+padding:12px;
 }
 
-.container {
-  width:100%;
-  max-width:430px;
-  padding:30px 24px;
-  border:1px solid #eee;
-  border-radius:18px;
-  box-shadow:0 8px 30px rgba(0,0,0,.08);
+.container{
+width:100%;
+max-width:1050px;
+margin:auto;
 }
 
-.logo {
-  text-align:center;
-  font-size:32px;
-  font-weight:900;
-  color:#c69a28;
-  margin-bottom:10px;
+.hidden{display:none!important}
+
+.logo{
+text-align:center;
+font-size:32px;
+font-weight:900;
+color:#C69A28;
+margin:20px 0 8px;
 }
 
-.subtitle {
-  text-align:center;
-  color:#666;
-  margin-bottom:28px;
-  font-size:14px;
+.subtitle{
+text-align:center;
+color:#555;
+margin-bottom:25px;
+font-size:14px;
 }
 
-.tabs { display:flex; gap:10px; margin-bottom:24px; }
-
-.tabs button {
-  flex:1;
-  padding:14px;
-  border:0;
-  border-radius:8px;
-  background:#111;
-  color:white;
-  font-weight:bold;
-  cursor:pointer;
+button{
+cursor:pointer;
+font-weight:bold;
 }
 
-.tabs button.active { background:#c69a28; }
-
-.field { margin-bottom:17px; }
-
-label {
-  display:block;
-  font-weight:bold;
-  margin-bottom:8px;
+.tabs{
+display:flex;
+gap:10px;
+margin-bottom:22px;
 }
 
-input {
-  width:100%;
-  padding:14px;
-  border:1px solid #ccc;
-  border-radius:8px;
-  font-size:15px;
+.tabs button{
+flex:1;
+padding:14px;
+border:0;
+border-radius:9px;
+background:#111;
+color:white;
 }
 
-input:focus {
-  outline:2px solid #c69a28;
-  border-color:#c69a28;
+.tabs button.active{
+background:#C69A28;
 }
 
-.password-box { position:relative; }
+.field{margin-bottom:16px}
 
-.password-box input { padding-right:75px; }
-
-.show-btn {
-  position:absolute;
-  right:10px;
-  top:50%;
-  transform:translateY(-50%);
-  border:0;
-  background:none;
-  color:#b58b20;
-  font-weight:bold;
-  cursor:pointer;
+label{
+display:block;
+font-weight:bold;
+margin-bottom:8px;
 }
 
-.forgot { text-align:right; margin:4px 0 20px; }
-
-.forgot button {
-  border:0;
-  background:none;
-  color:#b58b20;
-  font-weight:bold;
-  cursor:pointer;
+input{
+width:100%;
+padding:14px;
+border:1px solid #ccc;
+border-radius:9px;
+font-size:15px;
 }
 
-.main-btn {
-  width:100%;
-  padding:15px;
-  border:0;
-  border-radius:9px;
-  background:#c69a28;
-  color:white;
-  font-size:16px;
-  font-weight:bold;
-  cursor:pointer;
+input:focus{
+outline:2px solid #C69A28;
 }
 
-.main-btn:disabled { opacity:.6; }
+.password-box{position:relative}
 
-.hidden { display:none !important; }
+.password-box input{padding-right:75px}
 
-#message {
-  margin-top:18px;
-  text-align:center;
-  font-size:14px;
-  line-height:1.5;
-  overflow-wrap:anywhere;
+.show-btn{
+position:absolute;
+right:10px;
+top:50%;
+transform:translateY(-50%);
+border:0;
+background:none;
+color:#176B3A;
 }
 
-.footer {
-  text-align:center;
-  color:#777;
-  font-size:12px;
-  margin-top:25px;
+.forgot{text-align:right;margin:5px 0 20px}
+
+.forgot button{
+border:0;
+background:none;
+color:#176B3A;
 }
 
-#dashboard { text-align:center; }
-#dashboard h2 { color:#c69a28; margin-bottom:15px; }
-#dashboard p { margin-bottom:20px; overflow-wrap:anywhere; }
-  
-/* BiGGER WIN MOBILE RESPONSIVE DASHBOARD */
-
-* {
-  box-sizing: border-box;
+.main-btn{
+width:100%;
+padding:15px;
+border:0;
+border-radius:9px;
+background:#176B3A;
+color:white;
+font-size:16px;
 }
 
-html {
-  width: 100%;
-  min-width: 320px;
-  overflow-x: hidden;
+.main-btn:disabled{opacity:.6}
+
+#message{
+margin:15px 0;
+text-align:center;
+font-size:14px;
+overflow-wrap:anywhere;
 }
 
-body {
-  margin: 0;
-  padding: 12px;
-  width: 100%;
-  min-height: 100vh;
-  overflow-x: hidden;
-  font-family: Arial, sans-serif;
-  background: #E9F5EC;
+#dashboard{
+width:100%;
+padding:18px;
+border:1px solid #e5e5e5;
+border-radius:17px;
+background:#fff;
 }
 
-.container {
-  width: 100%;
-  max-width: 480px;
-  margin: 0 auto;
+.topbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+flex-wrap:wrap;
+gap:12px;
+margin-bottom:25px;
 }
 
-#dashboard {
-  width: 100%;
-  max-width: 100%;
-  padding: 16px !important;
-  overflow: hidden;
+.brand{
+font-size:25px;
+font-weight:900;
+color:#176B3A;
 }
 
-#dashboard h2 {
-  font-size: 21px;
-  line-height: 1.35;
+.brand span{color:#C69A28}
+
+.logout{
+padding:11px 17px;
+border:0;
+border-radius:8px;
+background:#111;
+color:white;
 }
 
-#dashboard p {
-  font-size: 14px;
-  line-height: 1.5;
-  overflow-wrap: anywhere;
+.hero{
+background:linear-gradient(120deg,#176B3A,#238B50);
+color:white;
+padding:27px 18px;
+border-radius:15px;
+text-align:center;
+margin-bottom:24px;
 }
 
-#dashboard button {
-  min-height: 44px;
-  font-size: 14px;
-  cursor: pointer;
+.hero h2{
+font-size:25px;
+margin-bottom:10px;
 }
 
-#dashboard > div:first-child {
-  flex-wrap: wrap;
+.hero p{font-size:14px}
+
+.game-strip{
+display:flex;
+justify-content:center;
+gap:15px;
+flex-wrap:wrap;
+margin-top:20px;
+font-size:28px;
 }
 
-#dashboard > div:nth-of-type(2) {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
+.section-title{
+font-size:21px;
+margin:22px 0 15px;
+color:#176B3A;
 }
 
-#dashboard > div:nth-of-type(2) > div {
-  min-width: 0;
-  padding: 14px;
-  overflow-wrap: anywhere;
+.dashboard-grid{
+display:grid;
+grid-template-columns:repeat(2,minmax(0,1fr));
+gap:13px;
 }
 
-#dashboard h3 {
-  font-size: 16px;
+.tile{
+background:#fff;
+border:1px solid #e4e4e4;
+border-top:4px solid #C69A28;
+border-radius:13px;
+padding:17px;
+min-width:0;
 }
 
-@media (max-width: 360px) {
-  body {
-    padding: 8px;
-  }
+.tile h3{margin-bottom:9px;font-size:16px}
 
-  #dashboard {
-    padding: 12px !important;
-  }
+.tile p{
+color:#555;
+font-size:13px;
+line-height:1.5;
+margin-bottom:13px;
+}
 
-  #dashboard h3 {
-    font-size: 14px;
-  }
-  }
-  
+.tile button{
+width:100%;
+padding:11px;
+border:0;
+border-radius:8px;
+background:#176B3A;
+color:white;
+}
+
+.coming{
+color:#176B3A;
+font-size:12px;
+font-weight:bold;
+}
+
+.money{
+margin-top:20px;
+background:#fff8e6;
+border:1px solid #e6c56a;
+padding:17px;
+border-radius:12px;
+text-align:center;
+}
+
+.money h3{color:#9B7415;margin-bottom:8px}
+
+.money p{font-size:13px;color:#555}
+
+#gamesHubArea{
+margin-top:22px;
+padding:18px;
+background:#F4F8F4;
+border-radius:15px;
+border:1px solid #dce8dd;
+}
+
+.hub-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px;
+flex-wrap:wrap;
+}
+
+.back-btn{
+background:#111;
+color:white;
+border:0;
+border-radius:8px;
+padding:10px 14px;
+}
+
+.search{
+margin:17px 0;
+}
+
+.category-list{
+display:flex;
+gap:8px;
+overflow-x:auto;
+padding-bottom:10px;
+}
+
+.category-list button{
+white-space:nowrap;
+padding:9px 13px;
+border:1px solid #176B3A;
+border-radius:20px;
+background:white;
+color:#176B3A;
+}
+
+.category-list button.active{
+background:#176B3A;
+color:white;
+}
+
+.games-grid{
+display:grid;
+grid-template-columns:repeat(2,minmax(0,1fr));
+gap:12px;
+margin-top:15px;
+}
+
+.game-card{
+background:white;
+padding:16px;
+border:1px solid #ddd;
+border-radius:12px;
+text-align:center;
+}
+
+.game-icon{font-size:35px;margin-bottom:9px}
+
+.game-card h3{font-size:15px;margin-bottom:7px}
+
+.game-card p{
+font-size:12px;
+color:#666;
+margin-bottom:12px;
+}
+
+.game-card button{
+width:100%;
+padding:11px;
+background:#176B3A;
+color:white;
+border:0;
+border-radius:8px;
+}
+
+#gamePlayArea{
+margin-top:20px;
+padding:20px;
+background:white;
+border:1px solid #ddd;
+border-radius:13px;
+text-align:center;
+}
+
+#gamePlayArea h3{
+color:#176B3A;
+margin-bottom:15px;
+}
+
+.game-action{
+padding:13px 20px;
+background:#C69A28;
+color:white;
+border:0;
+border-radius:9px;
+margin:10px 0;
+}
+
+.game-result{
+font-weight:bold;
+color:#176B3A;
+margin:15px 0;
+}
+
+.footer{
+text-align:center;
+font-size:12px;
+color:#777;
+margin:25px 0 10px;
+}
+
+@media(max-width:360px){
+.logo{font-size:26px}
+#dashboard{padding:12px}
+.tile{padding:12px}
+.tile h3{font-size:14px}
+.games-grid{gap:8px}
+}
 </style>
 </head>
 
@@ -236,6 +376,8 @@ body {
 
 <div class="logo">BiGGER WIN</div>
 <div class="subtitle">Welcome to a world of opportunities</div>
+
+<!-- AUTHENTICATION -->
 
 <div id="authArea">
 
@@ -247,17 +389,17 @@ body {
 <form id="authForm">
 
 <div class="field hidden" id="nameGroup">
-<label for="fullName">Full Name</label>
+<label>Full Name</label>
 <input id="fullName" type="text" placeholder="Enter your full name">
 </div>
 
 <div class="field">
-<label for="email">Email Address</label>
+<label>Email Address</label>
 <input id="email" type="email" placeholder="Enter your email" required>
 </div>
 
 <div class="field">
-<label for="password">Password</label>
+<label>Password</label>
 <div class="password-box">
 <input id="password" type="password" placeholder="Enter password" minlength="6" required>
 <button type="button" class="show-btn" id="showPassword">Show</button>
@@ -268,104 +410,153 @@ body {
 <button type="button" id="forgotPassword">Forgot Password?</button>
 </div>
 
-<button type="submit" class="main-btn" id="submitBtn">LOGIN</button>
-
+<button class="main-btn" type="submit" id="submitBtn">LOGIN</button>
 </form>
 
-<!-- PASSWORD RESET FORM -->
 <div id="resetArea" class="hidden">
+<h2>Reset Your Password</h2>
 
-  <h2>Reset Your Password</h2>
+<div class="field">
+<label>New Password</label>
+<input id="newPassword" type="password" minlength="6">
+</div>
 
-  <div class="field">
-    <label for="newPassword">New Password</label>
-    <input
-      id="newPassword"
-      type="password"
-      placeholder="Enter new password"
-      minlength="6"
-      required
-    >
-  </div>
+<div class="field">
+<label>Confirm Password</label>
+<input id="confirmNewPassword" type="password" minlength="6">
+</div>
 
-  <div class="field">
-    <label for="confirmNewPassword">Confirm New Password</label>
-    <input
-      id="confirmNewPassword"
-      type="password"
-      placeholder="Confirm new password"
-      minlength="6"
-      required
-    >
-  </div>
-
-  <button
-    type="button"
-    class="main-btn"
-    id="updatePasswordBtn"
-  >
-    RESET PASSWORD
-  </button>
-
+<button type="button" class="main-btn" id="updatePasswordBtn">
+RESET PASSWORD
+</button>
 </div>
 
 </div>
-<div id="dashboard" class="hidden" style="background:#E9F5EC; padding:20px; border-radius:16px; color:#176B3A;">
 
-  <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
-    <h2 style="color:#176B3A;">BiGGER <span style="color:#D9AD42;">WIN</span></h2>
-    <button id="logoutBtn" type="button" style="background:#176B3A;color:white;padding:10px 18px;border:0;border-radius:10px;">
-      LOG OUT
-    </button>
-  </div>
+<!-- DASHBOARD -->
 
-  <h2>Welcome to BiGGER WIN!</h2>
-  <p id="userEmail"></p>
-  <p>Play, Create, Connect and Win!</p>
+<div id="dashboard" class="hidden">
 
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin-top:24px;">
+<div class="topbar">
+<div class="brand">BiGGER <span>WIN</span></div>
+<button id="logoutBtn" class="logout" type="button">LOG OUT</button>
+</div>
 
-    <div style="background:white;padding:18px;border-radius:14px;">
-      <h3>🎮 Games Hub</h3>
-      <p>Discover exciting games and challenges.</p>
+<div class="hero">
+<h2>Welcome to BiGGER WIN!</h2>
+<p id="userEmail"></p>
+<p style="margin-top:12px">
+Play, Create, Connect and Win!
+</p>
 
-    </div>
+<div class="game-strip">
+<span>🎮</span>
+<span>🏎️</span>
+<span>⚽</span>
+<span>🧩</span>
+<span>🏆</span>
+<span>🚀</span>
+</div>
+</div>
 
-    <div style="background:white;padding:18px;border-radius:14px;">
-      <h3>🏆 Rewards</h3>
-      <p>Track your rewards and achievements.</p>
-      <strong style="color:#176B3A;">Coming Soon</strong>
-    </div>
+<h2 class="section-title">Your Dashboard</h2>
 
-    <div style="background:white;padding:18px;border-radius:14px;">
-      <h3>🎬 Creator Rewards</h3>
-      <p>Discover opportunities to earn from content.</p>
-      <strong style="color:#176B3A;">Coming Soon</strong>
-    </div>
+<div class="dashboard-grid">
 
-    <div style="background:white;padding:18px;border-radius:14px;">
-      <h3>🤖 WIN AI</h3>
-      <p>Your intelligent AI assistant.</p>
-      <strong style="color:#176B3A;">Coming Soon</strong>
-    </div>
+<div class="tile">
+<h3>🎮 Games Hub</h3>
+<p>Discover games, search and play free challenges.</p>
+<button id="openGamesHub" type="button">ENTER GAMES HUB</button>
+</div>
 
-    <div style="background:white;padding:18px;border-radius:14px;">
-      <h3>💬 WIN Chat</h3>
-      <p>Connect and communicate with the community.</p>
-      <strong style="color:#176B3A;">Coming Soon</strong>
-    </div>
+<div class="tile">
+<h3>🏆 Rewards</h3>
+<p>Track your rewards and achievements.</p>
+<strong class="coming">Coming Soon</strong>
+</div>
 
-    <div style="background:white;padding:18px;border-radius:14px;">
-      <h3>👤 My Profile</h3>
-      <p>Manage your personal account.</p>
-      <strong style="color:#176B3A;">Coming Soon</strong>
+<div class="tile">
+<h3>🎬 Creator Rewards</h3>
+<p>Discover opportunities to earn from content.</p>
+<strong class="coming">Coming Soon</strong>
+</div>
 
-      </div>
-  
-       </div>
+<div class="tile">
+<h3>🤖 WIN AI</h3>
+<p>Your intelligent AI assistant.</p>
+<strong class="coming">Coming Soon</strong>
+</div>
+
+<div class="tile">
+<h3>💬 WIN Chat</h3>
+<p>Connect and communicate with the community.</p>
+<strong class="coming">Coming Soon</strong>
+</div>
+
+<div class="tile">
+<h3>👤 My Profile</h3>
+<p>Manage your personal account.</p>
+<strong class="coming">Coming Soon</strong>
+</div>
+
+</div>
+
+<div class="money">
+<h3>💲 Play with Money</h3>
+<p>Real-money gaming, deposits and withdrawals.</p>
+<strong class="coming">COMING SOON</strong>
+</div>
+
+<!-- GAMES HUB -->
+
+<div id="gamesHubArea" class="hidden">
+
+<div class="hub-header">
+<h2 class="section-title">🎮 Games Hub</h2>
+<button id="closeGamesHub" class="back-btn" type="button">← Dashboard</button>
+</div>
+
+<p>Find your next favourite game and start playing!</p>
+
+<input
+id="gameSearch"
+class="search"
+type="search"
+placeholder="🔍 Search games..."
+>
+
+<div class="category-list" id="categoryList">
+<button class="active" data-category="All">All Games</button>
+<button data-category="Popular">Popular</button>
+<button data-category="Puzzle">Puzzle</button>
+<button data-category="Action">Action</button>
+<button data-category="Arcade">Arcade</button>
+</div>
+
+<div class="games-grid" id="gamesGrid"></div>
+
+<div id="gamePlayArea" class="hidden"></div>
+
+<div class="money">
+<h3>💲 Play with Money</h3>
+<strong class="coming">COMING SOON</strong>
+<p style="margin-top:8px">Enjoy free games while we prepare this feature.</p>
+</div>
+
+</div>
+
+</div>
+
+<div id="message" role="status"></div>
+
+<div class="footer">
+© 2026 BiGGER WIN. All rights reserved.
+</div>
+
+</div>
 
 <script>
-/* 1. SUPABASE CONNECTION */
+/* SUPABASE CONNECTION */
 
 const SUPABASE_URL =
 "https://kedrvewjsixadhrchvpu.supabase.co";
@@ -378,312 +569,501 @@ SUPABASE_URL,
 SUPABASE_KEY
 );
 
-/* 2. PAGE ELEMENTS */
-
 const $ = id => document.getElementById(id);
 
-const authForm = $("authForm");
 const authArea = $("authArea");
 const dashboard = $("dashboard");
+const authForm = $("authForm");
 const message = $("message");
 
 let mode = "login";
 let busy = false;
 
-function notify(text) {
+function notify(text){
 message.textContent = text;
 }
 
-/* 3. CHANGE AUTHENTICATION MODE */
+/* LOGIN AND SIGNUP TABS */
 
-function setMode(newMode) {
+function setMode(newMode){
 mode = newMode;
 
-$("loginTab").classList.toggle("active", mode === "login");
-$("signupTab").classList.toggle("active", mode === "signup");
+$("loginTab").classList.toggle("active",mode==="login");
+$("signupTab").classList.toggle("active",mode==="signup");
 
-$("nameGroup").classList.toggle("hidden", mode !== "signup");
-$("forgotArea").classList.toggle("hidden", mode !== "login");
+$("nameGroup").classList.toggle("hidden",mode!=="signup");
+$("forgotArea").classList.toggle("hidden",mode!=="login");
 
-$("fullName").required = mode === "signup";
+$("fullName").required = mode==="signup";
 
 $("submitBtn").textContent =
-mode === "login" ? "LOGIN" : "CREATE ACCOUNT";
-
-$("password").type = "password";
-$("showPassword").textContent = "Show";
+mode==="login" ? "LOGIN" : "CREATE ACCOUNT";
 
 notify("");
 }
 
-$("loginTab").addEventListener("click", () => setMode("login"));
-$("signupTab").addEventListener("click", () => setMode("signup"));
+$("loginTab").addEventListener("click",()=>setMode("login"));
+$("signupTab").addEventListener("click",()=>setMode("signup"));
 
-/* 4. SHOW OR HIDE PASSWORD */
+/* SHOW PASSWORD */
 
-$("showPassword").addEventListener("click", function() {
-const visible = $("password").type === "password";
-
+$("showPassword").addEventListener("click",function(){
+const visible = $("password").type==="password";
 $("password").type = visible ? "text" : "password";
 this.textContent = visible ? "Hide" : "Show";
 });
 
-/* 5. DASHBOARD */
+/* SHOW DASHBOARD */
 
-function showDashboard(user) {
+function showDashboard(user){
 authArea.classList.add("hidden");
 dashboard.classList.remove("hidden");
 $("userEmail").textContent = user.email || "";
+$("gamesHubArea").classList.add("hidden");
+}
+
+/* AUTHENTICATION */
+
+authForm.addEventListener("submit",async function(event){
+event.preventDefault();
+
+if(busy)return;
+
+busy=true;
+$("submitBtn").disabled=true;
+$("submitBtn").textContent="PLEASE WAIT...";
+
+try{
+const userEmail=$("email").value.trim();
+const userPassword=$("password").value;
+
+if(mode==="signup"){
+
+const fullName=$("fullName").value.trim();
+
+if(!fullName)throw new Error("Enter your full name.");
+
+const {data,error}=await supabaseClient.auth.signUp({
+email:userEmail,
+password:userPassword,
+options:{data:{full_name:fullName}}
+});
+
+if(error)throw error;
+
+if(data.session){
+showDashboard(data.user);
+notify("Account created successfully!");
+}else{
+notify("Account created! Check your email to confirm registration.");
+}
+
+}else{
+
+const {data,error}=await supabaseClient.auth.signInWithPassword({
+email:userEmail,
+password:userPassword
+});
+
+if(error)throw error;
+
+showDashboard(data.user);
 notify("Successfully logged in!");
 }
 
-/* 6. LOGIN AND SIGNUP */
-
-authForm.addEventListener("submit", async function(event) {
-event.preventDefault();
-
-if (busy) return;
-
-busy = true;
-$("submitBtn").disabled = true;
-$("submitBtn").textContent = "PLEASE WAIT...";
-
-try {
-const userEmail = $("email").value.trim();
-const userPassword = $("password").value;
-
-if (mode === "signup") {
-
-const fullName = $("fullName").value.trim();
-
-if (!fullName) throw new Error("Enter your full name.");
-
-const { data, error } = await supabaseClient.auth.signUp({
-email: userEmail,
-password: userPassword,
-options: {
-data: { full_name: fullName }
-}
-});
-
-if (error) throw error;
-
-if (data.session) {
-showDashboard(data.user);
-} else {
-notify("Account created! Check your email to confirm your registration.");
-}
-
-} else {
-
-const { data, error } = await supabaseClient.auth.signInWithPassword({
-email: userEmail,
-password: userPassword
-});
-
-if (error) throw error;
-
-showDashboard(data.user);
-}
-
-} catch (error) {
+}catch(error){
 notify(error.message);
-} finally {
-busy = false;
-$("submitBtn").disabled = false;
-$("submitBtn").textContent =
-mode === "login" ? "LOGIN" : "CREATE ACCOUNT";
+}finally{
+busy=false;
+$("submitBtn").disabled=false;
+$("submitBtn").textContent=
+mode==="login"?"LOGIN":"CREATE ACCOUNT";
 }
 });
 
-/* 7.  FORGOT PASSWORD */
+/* FORGOT PASSWORD */
 
-$("forgotPassword").addEventListener("click", async function() {
-  const userEmail = $("email").value.trim();
+$("forgotPassword").addEventListener("click",async function(){
 
-  if (!userEmail) {
-    notify("Enter your email address first.");
-    return;
-  }
+const userEmail=$("email").value.trim();
 
-  this.disabled = true;
-  notify("Sending recovery email...");
+if(!userEmail){
+notify("Enter your email address first.");
+return;
+}
 
-  try {
-    const { error } =
-      await supabaseClient.auth.resetPasswordForEmail(
-        userEmail,
-        {
-          redirectTo: window.location.origin + "/?reset=true"
-        }
-      );
+this.disabled=true;
+notify("Sending recovery email...");
 
-    if (error) throw error;
+try{
+const {error}=await supabaseClient.auth.resetPasswordForEmail(
+userEmail,
+{redirectTo:window.location.origin}
+);
 
-    notify("Recovery email sent. Check your inbox.");
+if(error)throw error;
 
-  } catch (error) {
-    notify(error.message);
-  } finally {
-    this.disabled = false;
-  }
+notify("Recovery email sent. Check your inbox.");
+
+}catch(error){
+notify(error.message);
+}finally{
+this.disabled=false;
+}
 });
 
-/* PASSWORD RESET HANDLER */
+/* PASSWORD RECOVERY */
 
-const updatePasswordBtn = $("updatePasswordBtn");
+supabaseClient.auth.onAuthStateChange((event,session)=>{
+if(event==="PASSWORD_RECOVERY"){
+authArea.classList.remove("hidden");
+dashboard.classList.add("hidden");
+$("resetArea").classList.remove("hidden");
+authForm.classList.add("hidden");
+document.querySelector(".tabs").classList.add("hidden");
+}
+});
 
-if (updatePasswordBtn) {
-  updatePasswordBtn.addEventListener("click", async function() {
-    const newPassword = $("newPassword").value;
-    const confirmPassword = $("confirmNewPassword").value;
+$("updatePasswordBtn").addEventListener("click",async function(){
 
-    if (newPassword.length < 6) {
-      notify("Password must be at least 6 characters.");
-      return;
-    }
+const password=$("newPassword").value;
+const confirm=$("confirmNewPassword").value;
 
-    if (newPassword !== confirmPassword) {
-      notify("Passwords do not match.");
-      return;
-    }
+if(password.length<6){
+notify("Password must contain at least 6 characters.");
+return;
+}
 
-    this.disabled = true;
-    notify("Updating your password...");
+if(password!==confirm){
+notify("Passwords do not match.");
+return;
+}
 
-    try {
-      const { error } = await supabaseClient.auth.updateUser({
-        password: newPassword
-      });
+this.disabled=true;
+notify("Updating password...");
 
-      if (error) throw error;
+try{
+const {error}=await supabaseClient.auth.updateUser({
+password:password
+});
 
-      notify("Password updated successfully. Please log in again.");
+if(error)throw error;
 
-      await supabaseClient.auth.signOut();
+await supabaseClient.auth.signOut();
 
-      $("resetArea").classList.add("hidden");
-      authArea.classList.remove("hidden");
-      dashboard.classList.add("hidden");
-      authForm.reset();
-      setMode("login");
+notify("Password updated. Please log in again.");
 
-    } catch (error) {
-      notify(error.message);
-    } finally {
-      this.disabled = false;
-    }
-  });
-                                     } 
-  
-/* OPEN GAMES HUB */
+$("resetArea").classList.add("hidden");
+authForm.classList.remove("hidden");
+document.querySelector(".tabs").classList.remove("hidden");
+authForm.reset();
+setMode("login");
 
-const openGamesHub = $("openGamesHub");
-const gamesHubArea = $("gamesHubArea");
+}catch(error){
+notify(error.message);
+}finally{
+this.disabled=false;
+}
+});
 
-if (openGamesHub && gamesHubArea) {
-  openGamesHub.addEventListener("click", function() {
-    gamesHubArea.classList.remove("hidden");
-    gamesHubArea.scrollIntoView({ behavior: "smooth" });
-  });
-      }
+/* GAMES HUB BUTTON */
 
-/* SPIN WHEEL DEMO */
+$("openGamesHub").addEventListener("click",function(){
 
-const spinWheelBtn = $("spinWheelBtn");
-const spinResult = $("spinResult");
+$("gamesHubArea").classList.remove("hidden");
 
-if (spinWheelBtn && spinResult) {
-  spinWheelBtn.addEventListener("click", function() {
-    const results = [
-      "Great try! 🌟",
-      "Keep playing! 🎮",
-      "Nice spin! 🎉",
-      "Try again! 💚",
-      "You're on a roll! 🏆"
-    ];
+$("gamesHubArea").scrollIntoView({
+behavior:"smooth",
+block:"start"
+});
 
-    spinWheelBtn.disabled = true;
-    spinResult.textContent = "Spinning... 🎡";
+});
 
-    setTimeout(function() {
-      const randomIndex = Math.floor(Math.random() * results.length);
-      spinResult.textContent =
-        "Demo result: " + results[randomIndex];
+$("closeGamesHub").addEventListener("click",function(){
 
-      spinWheelBtn.disabled = false;
-    }, 1500);
-  });
-           }
-      
-/* 8. LOGOUT */
+$("gamesHubArea").classList.add("hidden");
 
-$("logoutBtn").addEventListener("click", async function() {
-const { error } = await supabaseClient.auth.signOut();
+dashboard.scrollIntoView({behavior:"smooth"});
 
-if (error) {
+});
+
+/* GAMES CATALOGUE */
+
+const games=[
+{
+name:"Spin Wheel Demo",
+icon:"🎡",
+category:"Arcade",
+description:"Spin and discover a random demo result.",
+popular:true,
+play:"spin"
+},
+{
+name:"Number Guess",
+icon:"🔢",
+category:"Puzzle",
+description:"Find the secret number from 1 to 10.",
+popular:true,
+play:"guess"
+},
+{
+name:"Tap Challenge",
+icon:"⚡",
+category:"Action",
+description:"Test how fast you can tap.",
+popular:true,
+play:"tap"
+}
+];
+
+let selectedCategory="All";
+
+function displayGames(){
+
+const search=$("gameSearch").value.toLowerCase();
+
+const filtered=games.filter(game=>{
+
+const matchesSearch=
+game.name.toLowerCase().includes(search) ||
+game.category.toLowerCase().includes(search);
+
+const matchesCategory=
+selectedCategory==="All" ||
+(selectedCategory==="Popular" && game.popular) ||
+game.category===selectedCategory;
+
+return matchesSearch && matchesCategory;
+});
+
+$("gamesGrid").innerHTML="";
+
+if(filtered.length===0){
+$("gamesGrid").innerHTML=
+"<p>No games found. Try another search.</p>";
+return;
+}
+
+filtered.forEach(game=>{
+
+const card=document.createElement("div");
+card.className="game-card";
+
+const icon=document.createElement("div");
+icon.className="game-icon";
+icon.textContent=game.icon;
+
+const title=document.createElement("h3");
+title.textContent=game.name;
+
+const description=document.createElement("p");
+description.textContent=game.description;
+
+const button=document.createElement("button");
+button.textContent="PLAY NOW";
+button.addEventListener("click",()=>launchGame(game.play));
+
+card.append(icon,title,description,button);
+$("gamesGrid").appendChild(card);
+
+});
+
+}
+
+$("gameSearch").addEventListener("input",displayGames);
+
+$("categoryList").addEventListener("click",function(event){
+
+const button=event.target.closest("button[data-category]");
+if(!button)return;
+
+selectedCategory=button.dataset.category;
+
+document.querySelectorAll("#categoryList button")
+.forEach(item=>item.classList.remove("active"));
+
+button.classList.add("active");
+
+displayGames();
+
+});
+
+/* PLAYABLE GAMES */
+
+let secretNumber=0;
+let tapCount=0;
+let tapTimer=null;
+
+function launchGame(type){
+
+const area=$("gamePlayArea");
+area.classList.remove("hidden");
+
+if(tapTimer){
+clearTimeout(tapTimer);
+tapTimer=null;
+}
+
+if(type==="spin"){
+
+area.innerHTML=`
+<h3>🎡 Spin Wheel Demo</h3>
+<p>Ready to spin?</p>
+<button class="game-action" id="spinButton">SPIN NOW</button>
+<p class="game-result" id="gameResult">Your result will appear here.</p>
+`;
+
+$("spinButton").addEventListener("click",function(){
+
+this.disabled=true;
+$("gameResult").textContent="Spinning...";
+
+setTimeout(()=>{
+
+const results=[
+"Great try! 🌟",
+"Keep playing! 🎮",
+"Nice spin! 🎉",
+"Try again! 💚",
+"You're on a roll! 🏆"
+];
+
+$("gameResult").textContent=
+"Demo result: "+
+results[Math.floor(Math.random()*results.length)];
+
+this.disabled=false;
+
+},1200);
+
+});
+
+}
+
+if(type==="guess"){
+
+secretNumber=Math.floor(Math.random()*10)+1;
+
+area.innerHTML=`
+<h3>🔢 Number Guess</h3>
+<p>Guess the secret number between 1 and 10.</p>
+<input id="guessInput" type="number" min="1" max="10" placeholder="Enter your guess">
+<button class="game-action" id="guessButton">CHECK GUESS</button>
+<p class="game-result" id="gameResult"></p>
+<button class="game-action" id="newGuess">NEW GAME</button>
+`;
+
+$("guessButton").addEventListener("click",function(){
+
+const guess=Number($("guessInput").value);
+
+if(guess<1||guess>10){
+$("gameResult").textContent="Enter a number from 1 to 10.";
+return;
+}
+
+if(guess===secretNumber){
+$("gameResult").textContent="Congratulations! You got it! 🏆";
+}else{
+$("gameResult").textContent=
+guess<secretNumber?"Too low! Try again.":"Too high! Try again.";
+}
+
+});
+
+$("newGuess").addEventListener("click",()=>{
+launchGame("guess");
+});
+
+}
+
+if(type==="tap"){
+
+area.innerHTML=`
+<h3>⚡ Tap Challenge</h3>
+<p>Tap as many times as possible in 10 seconds!</p>
+<p class="game-result" id="gameResult">Ready?</p>
+<button class="game-action" id="tapButton">START CHALLENGE</button>
+`;
+
+$("tapButton").addEventListener("click",function(){
+
+if(this.dataset.playing==="yes"){
+tapCount++;
+$("gameResult").textContent="Taps: "+tapCount;
+return;
+}
+
+tapCount=0;
+this.dataset.playing="yes";
+this.textContent="TAP!";
+
+$("gameResult").textContent="Go!";
+
+tapTimer=setTimeout(()=>{
+
+this.dataset.playing="no";
+this.textContent="PLAY AGAIN";
+
+$("gameResult").textContent=
+"Time up! Your score: "+tapCount+" taps! 🎉";
+
+tapTimer=null;
+
+},10000);
+
+});
+
+}
+
+area.scrollIntoView({behavior:"smooth",block:"start"});
+
+}
+
+/* LOGOUT */
+
+$("logoutBtn").addEventListener("click",async function(){
+
+const {error}=await supabaseClient.auth.signOut();
+
+if(error){
 notify(error.message);
 return;
 }
 
 dashboard.classList.add("hidden");
 authArea.classList.remove("hidden");
+$("gamesHubArea").classList.add("hidden");
+
 authForm.reset();
 setMode("login");
 
 notify("You have logged out successfully.");
+
 });
 
-/* 9. RESTORE LOGIN SESSION */
+/* RESTORE EXISTING LOGIN */
 
-async function restoreSession() {
-try {
-const { data, error } = await supabaseClient.auth.getSession();
+async function restoreSession(){
 
-if (error) throw error;
+try{
 
-if (data.session) {
+const {data,error}=await supabaseClient.auth.getSession();
+
+if(error)throw error;
+
+if(data.session){
 showDashboard(data.session.user);
 }
-} catch (error) {
+
+}catch(error){
 notify(error.message);
 }
+
 }
 
+displayGames();
 restoreSession();
-
-/* DETECT PASSWORD RECOVERY */
-
-async function startApp() {
-  const { data, error } = await supabaseClient.auth.getSession();
-
-  if (error) {
-    notify(error.message);
-    return;
-  }
-
-  const isRecovery =
-    window.location.search.includes("reset=true") ||
-    window.location.hash.includes("type=recovery");
-
-  if (isRecovery) {
-    authArea.classList.remove("hidden");
-    dashboard.classList.add("hidden");
-
-    document.querySelector(".tabs").classList.add("hidden");
-    authForm.classList.add("hidden");
-    $("resetArea").classList.remove("hidden");
-
-    return;
-  }
-
-  if (data.session) {
-    showDashboard(data.session.user);
-  }
-}
-
-startApp();
-  
 
 </script>
 </body>

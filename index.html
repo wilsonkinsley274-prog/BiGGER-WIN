@@ -1,198 +1,406 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#ffffff">
 <title>BiGGER WIN</title>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+* { box-sizing:border-box; margin:0; padding:0; }
 
 body {
-  font-family: Arial, sans-serif;
-  background: #ffffff;
-  color: #111111;
-  min-height: 100vh;
+  font-family:Arial,sans-serif;
+  background:#fff;
+  color:#111;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
 }
 
-header {
-  text-align: center;
-  padding: 25px 15px;
-  border-bottom: 1px solid #d6ad45;
+.container {
+  width:100%;
+  max-width:430px;
+  padding:30px 24px;
+  border:1px solid #eee;
+  border-radius:18px;
+  box-shadow:0 8px 30px rgba(0,0,0,.08);
 }
 
 .logo {
-  color: #c69a2e;
-  font-size: 30px;
-  font-weight: 900;
-  letter-spacing: 2px;
+  text-align:center;
+  font-size:32px;
+  font-weight:900;
+  color:#c69a28;
+  margin-bottom:10px;
 }
 
 .subtitle {
-  color: #666;
-  font-size: 14px;
-  margin-top: 9px;
+  text-align:center;
+  color:#666;
+  margin-bottom:28px;
+  font-size:14px;
 }
 
-main {
-  max-width: 440px;
-  width: 100%;
-  margin: 45px auto;
-  padding: 20px;
-}
-
-.card {
-  border: 1px solid #d6ad45;
-  border-radius: 15px;
-  padding: 25px 20px;
-  background: white;
-  box-shadow: 0 4px 18px rgba(0,0,0,0.06);
-}
-
-h1 {
-  text-align: center;
-  color: #c69a2e;
-  margin-bottom: 20px;
-  font-size: 27px;
-}
-
-.tabs {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 25px;
-}
+.tabs { display:flex; gap:10px; margin-bottom:24px; }
 
 .tabs button {
-  flex: 1;
-  padding: 13px 5px;
-  border: 1px solid #d6ad45;
-  background: white;
-  color: #a77c19;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
+  flex:1;
+  padding:14px;
+  border:0;
+  border-radius:8px;
+  background:#111;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
 }
 
-.tabs button.active {
-  background: #d6ad45;
-  color: #111;
-}
+.tabs button.active { background:#c69a28; }
+
+.field { margin-bottom:17px; }
 
 label {
-  display: block;
-  font-size: 14px;
-  font-weight: bold;
-  margin: 15px 0 7px;
+  display:block;
+  font-weight:bold;
+  margin-bottom:8px;
 }
 
 input {
-  width: 100%;
-  padding: 14px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 15px;
-  background: white;
-  color: #111;
+  width:100%;
+  padding:14px;
+  border:1px solid #ccc;
+  border-radius:8px;
+  font-size:15px;
 }
 
-.password-box {
-  display: flex;
-  gap: 7px;
+input:focus {
+  outline:2px solid #c69a28;
+  border-color:#c69a28;
 }
 
-.password-box input {
-  flex: 1;
-  min-width: 0;
-}
+.password-box { position:relative; }
+
+.password-box input { padding-right:75px; }
 
 .show-btn {
-  padding: 0 10px;
-  border: 1px solid #d6ad45;
-  border-radius: 8px;
-  background: white;
-  color: #a77c19;
-  cursor: pointer;
+  position:absolute;
+  right:10px;
+  top:50%;
+  transform:translateY(-50%);
+  border:0;
+  background:none;
+  color:#b58b20;
+  font-weight:bold;
+  cursor:pointer;
 }
 
-.action {
-  width: 100%;
-  padding: 15px;
-  margin-top: 20px;
-  border: none;
-  border-radius: 8px;
-  background: #d6ad45;
-  color: #111;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
+.forgot { text-align:right; margin:4px 0 20px; }
+
+.forgot button {
+  border:0;
+  background:none;
+  color:#b58b20;
+  font-weight:bold;
+  cursor:pointer;
 }
 
-.forgot {
-  display: block;
-  text-align: right;
-  margin-top: 14px;
-  color: #a77c19;
-  font-size: 14px;
-  cursor: pointer;
+.main-btn {
+  width:100%;
+  padding:15px;
+  border:0;
+  border-radius:9px;
+  background:#c69a28;
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
 }
 
-.hidden {
-  display: none;
-}
+.main-btn:disabled { opacity:.6; }
+
+.hidden { display:none !important; }
 
 #message {
-  margin-top: 15px;
-  text-align: center;
-  font-size: 14px;
-  color: #a77c19;
-  overflow-wrap: anywhere;
+  margin-top:18px;
+  text-align:center;
+  font-size:14px;
+  line-height:1.5;
+  overflow-wrap:anywhere;
 }
 
-footer {
-  text-align: center;
-  padding: 25px;
-  color: #777;
-  font-size: 12px;
+.footer {
+  text-align:center;
+  color:#777;
+  font-size:12px;
+  margin-top:25px;
 }
 
+#dashboard { text-align:center; }
+#dashboard h2 { color:#c69a28; margin-bottom:15px; }
+#dashboard p { margin-bottom:20px; overflow-wrap:anywhere; }
 </style>
 </head>
- </script> 
+
 <body>
-<footer>
+<div class="container">
+
+<div class="logo">BiGGER WIN</div>
+<div class="subtitle">Welcome to a world of opportunities</div>
+
+<div id="authArea">
+
+<div class="tabs">
+<button id="loginTab" class="active" type="button">LOGIN</button>
+<button id="signupTab" type="button">SIGN UP</button>
+</div>
+
+<form id="authForm">
+
+<div class="field hidden" id="nameGroup">
+<label for="fullName">Full Name</label>
+<input id="fullName" type="text" placeholder="Enter your full name">
+</div>
+
+<div class="field">
+<label for="email">Email Address</label>
+<input id="email" type="email" placeholder="Enter your email" required>
+</div>
+
+<div class="field">
+<label for="password">Password</label>
+<div class="password-box">
+<input id="password" type="password" placeholder="Enter password" minlength="6" required>
+<button type="button" class="show-btn" id="showPassword">Show</button>
+</div>
+</div>
+
+<div class="forgot" id="forgotArea">
+<button type="button" id="forgotPassword">Forgot Password?</button>
+</div>
+
+<button type="submit" class="main-btn" id="submitBtn">LOGIN</button>
+
+</form>
+</div>
+
+<div id="dashboard" class="hidden">
+<h2>Welcome to BiGGER WIN!</h2>
+<p id="userEmail"></p>
+<button id="logoutBtn" class="main-btn" type="button">LOG OUT</button>
+</div>
+
+<div id="message" role="status" aria-live="polite"></div>
+
+<div class="footer">
+Gaming • Creator Rewards • Community • AI
+<br><br>
+© 2026 BiGGER WIN
+</div>
+
+</div>
+
 <script>
-document.addEventListener("DOMContentLoaded", function () {
+/* 1. SUPABASE CONNECTION */
 
-  const loginTab = document.getElementById("loginTab");
-  const signupTab = document.getElementById("signupTab");
-  const nameGroup = document.getElementById("nameGroup");
+const SUPABASE_URL =
+"https://kedrvewjsixadhrchvpu.supabase.co";
 
-  if (signupTab) {
-    signupTab.addEventListener("click", function () {
-      if (nameGroup) nameGroup.classList.remove("hidden");
-      signupTab.classList.add("active");
-      if (loginTab) loginTab.classList.remove("active");
-    });
-  }
+const SUPABASE_KEY =
+"sb_publishable_kY88vqNjvyYXQ6XjTRU9Bg_VVoOyqMq";
 
-  if (loginTab) {
-    loginTab.addEventListener("click", function () {
-      if (nameGroup) nameGroup.classList.add("hidden");
-      loginTab.classList.add("active");
-      if (signupTab) signupTab.classList.remove("active");
-    });
-  }
+const supabaseClient = window.supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
 
+/* 2. PAGE ELEMENTS */
+
+const $ = id => document.getElementById(id);
+
+const authForm = $("authForm");
+const authArea = $("authArea");
+const dashboard = $("dashboard");
+const message = $("message");
+
+let mode = "login";
+let busy = false;
+
+function notify(text) {
+message.textContent = text;
+}
+
+/* 3. CHANGE AUTHENTICATION MODE */
+
+function setMode(newMode) {
+mode = newMode;
+
+$("loginTab").classList.toggle("active", mode === "login");
+$("signupTab").classList.toggle("active", mode === "signup");
+
+$("nameGroup").classList.toggle("hidden", mode !== "signup");
+$("forgotArea").classList.toggle("hidden", mode !== "login");
+
+$("fullName").required = mode === "signup";
+
+$("submitBtn").textContent =
+mode === "login" ? "LOGIN" : "CREATE ACCOUNT";
+
+$("password").type = "password";
+$("showPassword").textContent = "Show";
+
+notify("");
+}
+
+$("loginTab").addEventListener("click", () => setMode("login"));
+$("signupTab").addEventListener("click", () => setMode("signup"));
+
+/* 4. SHOW OR HIDE PASSWORD */
+
+$("showPassword").addEventListener("click", function() {
+const visible = $("password").type === "password";
+
+$("password").type = visible ? "text" : "password";
+this.textContent = visible ? "Hide" : "Show";
 });
-  </script>
-  © 2026 BiGGER WIN. All rights reserved.
-</footer>
-  
-  </script>
-  </body>
+
+/* 5. DASHBOARD */
+
+function showDashboard(user) {
+authArea.classList.add("hidden");
+dashboard.classList.remove("hidden");
+$("userEmail").textContent = user.email || "";
+notify("Successfully logged in!");
+}
+
+/* 6. LOGIN AND SIGNUP */
+
+authForm.addEventListener("submit", async function(event) {
+event.preventDefault();
+
+if (busy) return;
+
+busy = true;
+$("submitBtn").disabled = true;
+$("submitBtn").textContent = "PLEASE WAIT...";
+
+try {
+const userEmail = $("email").value.trim();
+const userPassword = $("password").value;
+
+if (mode === "signup") {
+
+const fullName = $("fullName").value.trim();
+
+if (!fullName) throw new Error("Enter your full name.");
+
+const { data, error } = await supabaseClient.auth.signUp({
+email: userEmail,
+password: userPassword,
+options: {
+data: { full_name: fullName }
+}
+});
+
+if (error) throw error;
+
+if (data.session) {
+showDashboard(data.user);
+} else {
+notify("Account created! Check your email to confirm your registration.");
+}
+
+} else {
+
+const { data, error } = await supabaseClient.auth.signInWithPassword({
+email: userEmail,
+password: userPassword
+});
+
+if (error) throw error;
+
+showDashboard(data.user);
+}
+
+} catch (error) {
+notify(error.message);
+} finally {
+busy = false;
+$("submitBtn").disabled = false;
+$("submitBtn").textContent =
+mode === "login" ? "LOGIN" : "CREATE ACCOUNT";
+}
+});
+
+/* 7. FORGOT PASSWORD */
+
+$("forgotPassword").addEventListener("click", async function() {
+const userEmail = $("email").value.trim();
+
+if (!userEmail) {
+notify("Enter your email address first.");
+return;
+}
+
+this.disabled = true;
+notify("Sending recovery email...");
+
+try {
+const { error } = await supabaseClient.auth.resetPasswordForEmail(
+userEmail,
+{ redirectTo: window.location.origin }
+);
+
+if (error) throw error;
+
+notify("Recovery email sent. Check your inbox.");
+
+} catch (error) {
+notify(error.message);
+} finally {
+this.disabled = false;
+}
+});
+
+/* 8. LOGOUT */
+
+$("logoutBtn").addEventListener("click", async function() {
+const { error } = await supabaseClient.auth.signOut();
+
+if (error) {
+notify(error.message);
+return;
+}
+
+dashboard.classList.add("hidden");
+authArea.classList.remove("hidden");
+authForm.reset();
+setMode("login");
+
+notify("You have logged out successfully.");
+});
+
+/* 9. RESTORE LOGIN SESSION */
+
+async function restoreSession() {
+try {
+const { data, error } = await supabaseClient.auth.getSession();
+
+if (error) throw error;
+
+if (data.session) {
+showDashboard(data.session.user);
+}
+} catch (error) {
+notify(error.message);
+}
+}
+
+restoreSession();
+
+</script>
+</body>
 </html>

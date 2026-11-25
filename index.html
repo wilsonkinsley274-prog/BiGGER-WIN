@@ -337,31 +337,28 @@ body {
   id="spinWheelBtn"
   style="background:#176B3A;color:white;padding:12px;border:0;border-radius:9px;width:100%;">
   
-
 <!-- GAMES HUB AREA -->
 <div id="gamesHubArea" class="hidden"
 style="background:#FFFFFF;padding:18px;border-radius:14px;margin-top:20px;color:#176B3A;">
 
-  <h2>🎮 BiGGER WIN Games Hub</h2>
-  <p>Choose a game and enjoy the experience!</p>
+ <h2>🎮 BiGGER WIN Games Hub</h2>
+<p>Choose a game and enjoy the experience!</p>
+<!-- SPIN WHEEL -->
+ <div style="background:#E9F5EC;padding:18px;border-radius:14px;margin-top:15px;text-align:center;">
 
-  <!-- SPIN WHEEL -->
-  <div style="background:#E9F5EC;padding:18px;border-radius:14px;margin-top:15px;text-align:center;">
+ <h3>🎡 Spin Wheel</h3>
+ <p>Spin and discover your demo result!</p>
 
-    <h3>🎡 Spin Wheel</h3>
-    <p>Spin and discover your demo result!</p>
+ <div style="position:relative;width:min(260px,80vw);aspect-ratio:1;margin:25px auto;">
+ <div style="position:absolute;top:-8px;left:50%;transform:translateX(-50%);z-index:2;width:0;height:0;border-left:14px solid transparent;border-right:14px solid transparent;border-top:28px solid #D9AD42;"></div>
 
-    <div style="position:relative;width:min(260px,80vw);aspect-ratio:1;margin:25px auto;">
-
-      <div style="position:absolute;top:-8px;left:50%;transform:translateX(-50%);z-index:2;width:0;height:0;border-left:14px solid transparent;border-right:14px solid transparent;border-top:28px solid #D9AD42;"></div>
-
-      <div id="spinWheel"
-      style="width:100%;height:100%;box-sizing:border-box;border-radius:50%;border:7px solid #D9AD42;background:conic-gradient(#176B3A 0deg 45deg,#D9AD42 45deg 90deg,#268B50 90deg 135deg,#FFFFFF 135deg 180deg,#176B3A 180deg 225deg,#D9AD42 225deg 270deg,#268B50 270deg 315deg,#FFFFFF 315deg 360deg);display:flex;align-items:center;justify-content:center;transition:transform 4s cubic-bezier(0.15,0.7,0.15,1);">
-
-        <div style="width:65px;height:65px;border-radius:50%;background:white;border:5px solid #D9AD42;display:flex;align-items:center;justify-content:center;font-weight:bold;">
-          WIN
-        </div>
+<div id="spinWheel"
+style="width:100%;height:100%;box-sizing:border-box;border-radius:50%;border:7px solid #D9AD42;background:conic-gradient(#176B3A 0deg 45deg,#D9AD42 45deg 90deg,#268B50 90deg 135deg,#FFFFFF 135deg 180deg,#176B3A 180deg 225deg,#D9AD42 225deg 270deg,#268B50 270deg 315deg,#FFFFFF 315deg 360deg);display:flex;align-items:center;justify-content:center;transition:transform 4s cubic-bezier(0.15,0.7,0.15,1);">
+  <div style="width:65px;height:65px;border-radius:50%;background:white;border:5px solid #D9AD42;display:flex;align-items:center;justify-content:center;font-weight:bold;">
+    WIN
+        
       </div>
+  
     </div>
 
     <button id="spinWheelBtn" type="button"

@@ -368,6 +368,132 @@ margin:25px 0 10px;
 .tile h3{font-size:14px}
 .games-grid{gap:8px}
 }
+  
+/* BiGGER WIN - MODERN DASHBOARD UPGRADE */
+
+#dashboard {
+  background: linear-gradient(145deg, #f2faf4, #ffffff);
+  padding: 16px;
+  min-height: 100vh;
+  color: #17251c;
+}
+
+#dashboard .topbar {
+  background: #ffffff;
+  padding: 16px;
+  border-radius: 18px;
+  box-shadow: 0 4px 18px rgba(20, 80, 45, 0.10);
+  border-bottom: 3px solid #d6ae45;
+}
+
+#dashboard .brand {
+  color: #176b3a;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+#dashboard .brand span {
+  color: #c79a28;
+}
+
+#dashboard .hero {
+  background: linear-gradient(135deg, #176b3a, #23864d);
+  color: white;
+  padding: 28px 20px;
+  border-radius: 22px;
+  margin-top: 20px;
+  box-shadow: 0 8px 22px rgba(23, 107, 58, 0.18);
+}
+
+#dashboard .hero h2 {
+  font-size: 25px;
+  font-weight: 800;
+}
+
+#dashboard .game-strip {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 22px;
+  font-size: 27px;
+}
+
+#dashboard .section-title {
+  color: #176b3a;
+  font-weight: 800;
+  margin-top: 25px;
+  margin-bottom: 16px;
+}
+
+#dashboard .dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+}
+
+#dashboard .tile {
+  background: #ffffff;
+  padding: 19px 15px;
+  border-radius: 18px;
+  border: 1px solid #e2eee5;
+  border-bottom: 4px solid #d6ae45;
+  box-shadow: 0 5px 16px rgba(20, 80, 45, 0.08);
+  transition: transform 0.2s ease;
+}
+
+#dashboard .tile h3 {
+  color: #176b3a;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+#dashboard .tile p {
+  color: #647568;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+#dashboard .tile button {
+  background: #176b3a;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 11px;
+  font-weight: 800;
+  width: 100%;
+}
+
+#dashboard .coming {
+  display: inline-block;
+  background: #fff6dc;
+  color: #98721a;
+  padding: 7px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  margin-top: 8px;
+}
+
+#dashboard .money {
+  background: #17251c;
+  color: white;
+  padding: 22px;
+  margin-top: 22px;
+  border-radius: 18px;
+  border: 2px solid #d6ae45;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+#dashboard .money h3 {
+  color: #f0cc67;
+}
+
+@media (max-width: 360px) {
+  #dashboard .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+  }
+  
 </style>
 </head>
 

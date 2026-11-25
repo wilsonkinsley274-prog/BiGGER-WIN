@@ -332,12 +332,17 @@ body {
       <h3>🎮 Games Hub</h3>
       <p>Discover exciting games and challenges.</p>
       
+
 <button
   type="button"
-  id="openGamesHub"
-  style="background:#176B3A;color:white;padding:12px;border:0;border-radius:9px;width:100%;margin-top:10px;">
-  EXPLORE GAMES
+  id="spinWheelBtn"
+  style="background:#176B3A;color:white;padding:12px;border:0;border-radius:9px;width:100%;">
+  🎡 SPIN THE WHEEL
 </button>
+
+<p id="spinResult" style="color:#176B3A;font-weight:bold;text-align:center;margin-top:12px;">
+  Your result will appear here.
+</p>
       
     </div>
 
@@ -633,7 +638,35 @@ if (openGamesHub && gamesHubArea) {
     gamesHubArea.scrollIntoView({ behavior: "smooth" });
   });
       }
-    
+
+/* SPIN WHEEL DEMO */
+
+const spinWheelBtn = $("spinWheelBtn");
+const spinResult = $("spinResult");
+
+if (spinWheelBtn && spinResult) {
+  spinWheelBtn.addEventListener("click", function() {
+    const results = [
+      "Great try! 🌟",
+      "Keep playing! 🎮",
+      "Nice spin! 🎉",
+      "Try again! 💚",
+      "You're on a roll! 🏆"
+    ];
+
+    spinWheelBtn.disabled = true;
+    spinResult.textContent = "Spinning... 🎡";
+
+    setTimeout(function() {
+      const randomIndex = Math.floor(Math.random() * results.length);
+      spinResult.textContent =
+        "Demo result: " + results[randomIndex];
+
+      spinWheelBtn.disabled = false;
+    }, 1500);
+  });
+           }
+      
 /* 8. LOGOUT */
 
 $("logoutBtn").addEventListener("click", async function() {

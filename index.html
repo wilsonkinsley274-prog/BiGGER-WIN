@@ -185,6 +185,44 @@ input:focus {
 <button type="submit" class="main-btn" id="submitBtn">LOGIN</button>
 
 </form>
+
+<!-- PASSWORD RESET FORM -->
+<div id="resetArea" class="hidden">
+
+  <h2>Reset Your Password</h2>
+
+  <div class="field">
+    <label for="newPassword">New Password</label>
+    <input
+      id="newPassword"
+      type="password"
+      placeholder="Enter new password"
+      minlength="6"
+      required
+    >
+  </div>
+
+  <div class="field">
+    <label for="confirmNewPassword">Confirm New Password</label>
+    <input
+      id="confirmNewPassword"
+      type="password"
+      placeholder="Confirm new password"
+      minlength="6"
+      required
+    >
+  </div>
+
+  <button
+    type="button"
+    class="main-btn"
+    id="updatePasswordBtn"
+  >
+    RESET PASSWORD
+  </button>
+
+</div>
+
 </div>
 
 <div id="dashboard" class="hidden">

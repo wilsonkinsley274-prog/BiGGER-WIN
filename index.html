@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BiGGER WIN</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+* { box-sizing:border-box; margin:0; padding:0; }
+
+body {
+  font-family:Arial,sans-serif;
+  background:#fff;
+  color:#111;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+}
+
+.container {
+  width:100%;
+  max-width:430px;
+  padding:30px 24px;
+  border:1px solid #eee;
+  border-radius:18px;
+  box-shadow:0 8px 30px rgba(0,0,0,.08);
+}
+
+.logo {
+  text-align:center;
+  font-size:32px;
+  font-weight:900;
+  color:#c69a28;
+  margin-bottom:10px;
+}
+
+.subtitle {
+  text-align:center;
+  color:#666;
+  margin-bottom:28px;
+  font-size:14px;
+}
+
+.tabs { display:flex; gap:10px; margin-bottom:24px; }
+
+.tabs button {
+  flex:1;
+  padding:14px;
+  border:0;
+  border-radius:8px;
+  background:#111;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.tabs button.active { background:#c69a28; }
+
+.field { margin-bottom:17px; }
+
+label {
+  display:block;
+  font-weight:bold;
+  margin-bottom:8px;
+}
+
+input {
+  width:100%;
+  padding:14px;
+  border:1px solid #ccc;
+  border-radius:8px;
+  font-size:15px;
+}
+
+input:focus {
+  outline:2px solid #c69a28;
+  border-color:#c69a28;
+}
+
+.password-box { position:relative; }
+
+.password-box input { padding-right:75px; }
+
+.show-btn {
+  position:absolute;
+  right:10px;
+  top:50%;
+  transform:translateY(-50%);
+  border:0;
+  background:none;
+  color:#b58b20;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.forgot { text-align:right; margin:4px 0 20px; }
+
+.forgot button {
+  border:0;
+  background:none;
+  color:#b58b20;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.main-btn {
+  width:100%;
+  padding:15px;
+  border:0;
+  border-radius:9px;
+  background:#c69a28;
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.main-btn:disabled { opacity:.6; }
+
+.hidden { display:none !important; }
+
+#message {
+  margin-top:18px;
+  text-align:center;
+  font-size:14px;
+  line-height:1.5;
+  overflow-wrap:anywhere;
+}
+
+.footer {
+  text-align:center;
+  color:#777;
+  font-size:12px;
+  margin-top:25px;
+}
+
+#dashboard { text-align:center; }
+#dashboard h2 { color:#c69a28; margin-bottom:15px; }
+#dashboard p { margin-bottom:20px; overflow-wrap:anywhere; }
+  
+/* BiGGER WIN MOBILE RESPONSIVE DASHBOARD */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  width: 100%;
+  min-width: 320px;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  padding: 12px;
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: Arial, sans-serif;
+  background: #E9F5EC;
+}
+
+.container {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+#dashboard {
+  width: 100%;
+  max-width: 100%;
+  padding: 16px !important;
+  overflow: hidden;
+}
+
+#dashboard h2 {
+  font-size: 21px;
+  line-height: 1.35;
+}
+
+#dashboard p {
+  font-size: 14px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+#dashboard button {
+  min-height: 44px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+#dashboard > div:first-child {
+  flex-wrap: wrap;
+}
+
+#dashboard > div:nth-of-type(2) {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+#dashboard > div:nth-of-type(2) > div {
+  min-width: 0;
+  padding: 14px;
+  overflow-wrap: anywhere;
+}
+
+#dashboard h3 {
+  font-size: 16px;
+}
+
+@media (max-width: 360px) {
+  body {
+    padding: 8px;
+  }
+
+  #dashboard {
+    padding: 12px !important;
+  }
+
+  #dashboard h3 {
+    font-size: 14px;
+  }
+  }
+  
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<div class="logo">BiGGER WIN</div>
+<div class="subtitle">Welcome to a world of opportunities</div>
+
+<div id="authArea">
+
+<div class="tabs">
+<button id="loginTab" class="active" type="button">LOGIN</button>
+<button id="signupTab" type="button">SIGN UP</button>
+</div>
+
+<form id="authForm">
+
+<div class="field hidden" id="nameGroup">
+<label for="fullName">Full Name</label>
+<input id="fullName" type="text" placeholder="Enter your full name">
+</div>
+
+<div class="field">
+<label for="email">Email Address</label>
+<input id="email" type="email" placeholder="Enter your email" required>
+</div>
+
+<div class="field">
+<label for="password">Password</label>
+<div class="password-box">
+<input id="password" type="password" placeholder="Enter password" minlength="6" required>
+<button type="button" class="show-btn" id="showPassword">Show</button>
+</div>
+</div>
+
+<div class="forgot" id="forgotArea">
+<button type="button" id="forgotPassword">Forgot Password?</button>
+</div>
+
+<button type="submit" class="main-btn" id="submitBtn">LOGIN</button>
+
+</form>
+
+<!-- PASSWORD RESET FORM -->
+<div id="resetArea" class="hidden">
+
+  <h2>Reset Your Password</h2>
+
+  <div class="field">
+    <label for="newPassword">New Password</label>
+    <input
+      id="newPassword"
+      type="password"
+      placeholder="Enter new password"
+      minlength="6"
+      required
+    >
+  </div>
+
+  <div class="field">
+    <label for="confirmNewPassword">Confirm New Password</label>
+    <input
+      id="confirmNewPassword"
+      type="password"
+      placeholder="Confirm new password"
+      minlength="6"
+      required
+    >
+  </div>
+
+  <button
+    type="button"
+    class="main-btn"
+    id="updatePasswordBtn"
+  >
+    RESET PASSWORD
+  </button>
+
+</div>
+
+</div>
+
+
+<div id="dashboard" class="hidden" style="background:#E9F5EC; padding:20px; border-radius:16px; color:#176B3A;">
+
+  <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+    <h2 style="color:#176B3A;">BiGGER <span style="color:#D9AD42;">WIN</span></h2>
+    <button id="logoutBtn" type="button" style="background:#176B3A;color:white;padding:10px 18px;border:0;border-radius:10px;">
+      LOG OUT
+    </button>
+  </div>
+
+  <h2>Welcome to BiGGER WIN!</h2>
+  <p id="userEmail"></p>
+  <p>Play, Create, Connect and Win!</p>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin-top:24px;">
+
+    <div style="background:white;padding:18px;border-radius:14px;">
+      <h3>🎮 Games Hub</h3>
+      <p>Discover exciting games and challenges.</p>
+      
+
+<button
+  type="button"
+  id="spinWheelBtn"
+  style="background:#176B3A;color:white;padding:12px;border:0;border-radius:9px;width:100%;">
+  🎡 SPIN THE WHEEL
+</button>
+
+<p id="spinResult" style="color:#176B3A;font-weight:bold;text-align:center;margin-top:12px;">
+  Your result will appear here.
+</p>
+      
+    </div>
+
+    <div style="background:white;padding:18px;border-radius:14px;">
+      <h3>🏆 Rewards</h3>
+      <p>Track your rewards and achievements.</p>
+      <strong style="color:#176B3A;">Coming Soon</strong>
+    </div>
+
+    <div style="background:white;padding:18px;border-radius:14px;">
+      <h3>🎬 Creator Rewards</h3>
+      <p>Discover opportunities to earn from content.</p>
+      <strong style="color:#176B3A;">Coming Soon</strong>
+    </div>
+
+    <div style="background:white;padding:18px;border-radius:14px;">
+      <h3>🤖 WIN AI</h3>
+      <p>Your intelligent AI assistant.</p>
+      <strong style="color:#176B3A;">Coming Soon</strong>
+    </div>
+
+    <div style="background:white;padding:18px;border-radius:14px;">
+      <h3>💬 WIN Chat</h3>
+      <p>Connect and communicate with the community.</p>
+      <strong style="color:#176B3A;">Coming Soon</strong>
+    </div>
+
+    <div style="background:white;padding:18px;border-radius:14px;">
+      <h3>👤 My Profile</h3>
+      <p>Manage your personal account.</p>
+      <strong style="color:#176B3A;">Coming Soon</strong>
+    </div>
+
+  </div>
+  
+<!-- GAMES HUB AREA -->
+<div id="gamesHubArea" class="hidden"
+  style="background:#FFFFFF;padding:18px;border-radius:14px;margin-top:20px;">
+
+  <h2 style="color:#176B3A;">🎮 Games Hub</h2>
+  <p>Choose a game and enjoy the experience!</p>
+
+  <div style="background:#E9F5EC;padding:16px;border-radius:12px;margin-top:14px;">
+    <h3>🎡 Spin Wheel</h3>
+    <p>Try the Spin Wheel demo.</p>
+    <button type="button"
+      style="background:#176B3A;color:white;padding:12px;border:0;border-radius:9px;width:100%;">
+      SPIN WHEEL DEMO
+    </button>
+    <small>Demo only — no real prizes or payments coming soon.</small>
+  </div>
+
+  <div style="background:#E9F5EC;padding:16px;border-radius:12px;margin-top:14px;">
+    <h3>🎯 Quick Pick</h3>
+    <p>Coming soon.</p>
+  </div>
+
+  <div style="background:#E9F5EC;padding:16px;border-radius:12px;margin-top:14px;">
+    <h3>🔥 Score Streak</h3>
+    <p>Coming soon.</p>
+  </div>
+
+  <button type="button"
+    onclick="document.getElementById('gamesHubArea').classList.add('hidden')"
+    style="background:#D9AD42;color:#176B3A;padding:12px;border:0;border-radius:9px;width:100%;margin-top:18px;">
+    BACK TO DASHBOARD
+  </button>
+
+  </div>
+  
+</div>
+
+<script>
+/* 1. SUPABASE CONNECTION */
+
+const SUPABASE_URL =
+"https://kedrvewjsixadhrchvpu.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_kY88vqNjvyYXQ6XjTRU9Bg_VVoOyqMq";
+
+const supabaseClient = window.supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
+/* 2. PAGE ELEMENTS */
+
+const $ = id => document.getElementById(id);
+
+const authForm = $("authForm");
+const authArea = $("authArea");
+const dashboard = $("dashboard");
+const message = $("message");
+
+let mode = "login";
+let busy = false;
+
+function notify(text) {
+message.textContent = text;
+}
+
+/* 3. CHANGE AUTHENTICATION MODE */
+
+function setMode(newMode) {
+mode = newMode;
+
+$("loginTab").classList.toggle("active", mode === "login");
+$("signupTab").classList.toggle("active", mode === "signup");
+
+$("nameGroup").classList.toggle("hidden", mode !== "signup");
+$("forgotArea").classList.toggle("hidden", mode !== "login");
+
+$("fullName").required = mode === "signup";
+
+$("submitBtn").textContent =
+mode === "login" ? "LOGIN" : "CREATE ACCOUNT";
+
+$("password").type = "password";
+$("showPassword").textContent = "Show";
+
+notify("");
+}
+
+$("loginTab").addEventListener("click", () => setMode("login"));
+$("signupTab").addEventListener("click", () => setMode("signup"));
+
+/* 4. SHOW OR HIDE PASSWORD */
+
+$("showPassword").addEventListener("click", function() {
+const visible = $("password").type === "password";
+
+$("password").type = visible ? "text" : "password";
+this.textContent = visible ? "Hide" : "Show";
+});
+
+/* 5. DASHBOARD */
+
+function showDashboard(user) {
+authArea.classList.add("hidden");
+dashboard.classList.remove("hidden");
+$("userEmail").textContent = user.email || "";
+notify("Successfully logged in!");
+}
+
+/* 6. LOGIN AND SIGNUP */
+
+authForm.addEventListener("submit", async function(event) {
+event.preventDefault();
+
+if (busy) return;
+
+busy = true;
+$("submitBtn").disabled = true;
+$("submitBtn").textContent = "PLEASE WAIT...";
+
+try {
+const userEmail = $("email").value.trim();
+const userPassword = $("password").value;
+
+if (mode === "signup") {
+
+const fullName = $("fullName").value.trim();
+
+if (!fullName) throw new Error("Enter your full name.");
+
+const { data, error } = await supabaseClient.auth.signUp({
+email: userEmail,
+password: userPassword,
+options: {
+data: { full_name: fullName }
+}
+});
+
+if (error) throw error;
+
+if (data.session) {
+showDashboard(data.user);
+} else {
+notify("Account created! Check your email to confirm your registration.");
+}
+
+} else {
+
+const { data, error } = await supabaseClient.auth.signInWithPassword({
+email: userEmail,
+password: userPassword
+});
+
+if (error) throw error;
+
+showDashboard(data.user);
+}
+
+} catch (error) {
+notify(error.message);
+} finally {
+busy = false;
+$("submitBtn").disabled = false;
+$("submitBtn").textContent =
+mode === "login" ? "LOGIN" : "CREATE ACCOUNT";
+}
+});
+
+/* 7.  FORGOT PASSWORD */
+
+$("forgotPassword").addEventListener("click", async function() {
+  const userEmail = $("email").value.trim();
+
+  if (!userEmail) {
+    notify("Enter your email address first.");
+    return;
+  }
+
+  this.disabled = true;
+  notify("Sending recovery email...");
+
+  try {
+    const { error } =
+      await supabaseClient.auth.resetPasswordForEmail(
+        userEmail,
+        {
+          redirectTo: window.location.origin + "/?reset=true"
+        }
+      );
+
+    if (error) throw error;
+
+    notify("Recovery email sent. Check your inbox.");
+
+  } catch (error) {
+    notify(error.message);
+  } finally {
+    this.disabled = false;
+  }
+});
+
+/* PASSWORD RESET HANDLER */
+
+const updatePasswordBtn = $("updatePasswordBtn");
+
+if (updatePasswordBtn) {
+  updatePasswordBtn.addEventListener("click", async function() {
+    const newPassword = $("newPassword").value;
+    const confirmPassword = $("confirmNewPassword").value;
+
+    if (newPassword.length < 6) {
+      notify("Password must be at least 6 characters.");
+      return;
+    }
+
+    if (newPassword !== confirmPassword) {
+      notify("Passwords do not match.");
+      return;
+    }
+
+    this.disabled = true;
+    notify("Updating your password...");
+
+    try {
+      const { error } = await supabaseClient.auth.updateUser({
+        password: newPassword
+      });
+
+      if (error) throw error;
+
+      notify("Password updated successfully. Please log in again.");
+
+      await supabaseClient.auth.signOut();
+
+      $("resetArea").classList.add("hidden");
+      authArea.classList.remove("hidden");
+      dashboard.classList.add("hidden");
+      authForm.reset();
+      setMode("login");
+
+    } catch (error) {
+      notify(error.message);
+    } finally {
+      this.disabled = false;
+    }
+  });
+                                     } 
+  
+/* OPEN GAMES HUB */
+
+const openGamesHub = $("openGamesHub");
+const gamesHubArea = $("gamesHubArea");
+
+if (openGamesHub && gamesHubArea) {
+  openGamesHub.addEventListener("click", function() {
+    gamesHubArea.classList.remove("hidden");
+    gamesHubArea.scrollIntoView({ behavior: "smooth" });
+  });
+      }
+
+/* SPIN WHEEL DEMO */
+
+const spinWheelBtn = $("spinWheelBtn");
+const spinResult = $("spinResult");
+
+if (spinWheelBtn && spinResult) {
+  spinWheelBtn.addEventListener("click", function() {
+    const results = [
+      "Great try! 🌟",
+      "Keep playing! 🎮",
+      "Nice spin! 🎉",
+      "Try again! 💚",
+      "You're on a roll! 🏆"
+    ];
+
+    spinWheelBtn.disabled = true;
+    spinResult.textContent = "Spinning... 🎡";
+
+    setTimeout(function() {
+      const randomIndex = Math.floor(Math.random() * results.length);
+      spinResult.textContent =
+        "Demo result: " + results[randomIndex];
+
+      spinWheelBtn.disabled = false;
+    }, 1500);
+  });
+           }
+      
+/* 8. LOGOUT */
+
+$("logoutBtn").addEventListener("click", async function() {
+const { error } = await supabaseClient.auth.signOut();
+
+if (error) {
+notify(error.message);
+return;
+}
+
+dashboard.classList.add("hidden");
+authArea.classList.remove("hidden");
+authForm.reset();
+setMode("login");
+
+notify("You have logged out successfully.");
+});
+
+/* 9. RESTORE LOGIN SESSION */
+
+async function restoreSession() {
+try {
+const { data, error } = await supabaseClient.auth.getSession();
+
+if (error) throw error;
+
+if (data.session) {
+showDashboard(data.session.user);
+}
+} catch (error) {
+notify(error.message);
+}
+}
+
+restoreSession();
+
+/* DETECT PASSWORD RECOVERY */
+
+async function startApp() {
+  const { data, error } = await supabaseClient.auth.getSession();
+
+  if (error) {
+    notify(error.message);
+    return;
+  }
+
+  const isRecovery =
+    window.location.search.includes("reset=true") ||
+    window.location.hash.includes("type=recovery");
+
+  if (isRecovery) {
+    authArea.classList.remove("hidden");
+    dashboard.classList.add("hidden");
+
+    document.querySelector(".tabs").classList.add("hidden");
+    authForm.classList.add("hidden");
+    $("resetArea").classList.remove("hidden");
+
+    return;
+  }
+
+  if (data.session) {
+    showDashboard(data.session.user);
+  }
+}
+
+startApp();
+  
+
+</script>
+</body>
+  </html>
